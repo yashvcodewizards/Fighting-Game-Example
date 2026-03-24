@@ -17,7 +17,7 @@ MonoBehaviour:
   ActiveFrames: 4
   RecoveryFrames: 20
   EnemyHitStopFrames: 25
-  LungeForce: {x: 4, y: 1}
+  LungeForce: {x: 2, y: 1}
   LungeFrame: 0
   Knockback: {x: 4, y: 0}
   Launches: 0

@@ -121,7 +121,6 @@ namespace FightTest.States
                     }
 
                     _hasHitThisSwing = true;
-                    Debug.Log($"[{_label}] Hit {_overlapBuffer[i].name}");
                     hittable.ReceiveHit(_data);
                     return;
                 }
