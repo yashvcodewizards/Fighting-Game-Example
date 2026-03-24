@@ -13,11 +13,11 @@ MonoBehaviour:
   m_Name: Airborn Heavy Attack
   m_EditorClassIdentifier: 
   Height: 2
-  StartupFrames: 4
+  StartupFrames: 15
   ActiveFrames: 4
   RecoveryFrames: 20
   EnemyHitStopFrames: 25
-  LungeForce: {x: 0, y: 0}
+  LungeForce: {x: 4, y: 1}
   LungeFrame: 0
   Knockback: {x: 4, y: 0}
   Launches: 0

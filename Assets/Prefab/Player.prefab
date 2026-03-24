@@ -2938,6 +2938,7 @@ GameObject:
   - component: {fileID: 3878497683875837465}
   - component: {fileID: 1091719652904086829}
   - component: {fileID: 4851650364047804634}
+  - component: {fileID: 2664696759132402817}
   m_Layer: 0
   m_Name: Player
   m_TagString: Untagged
@@ -3074,18 +3075,23 @@ MonoBehaviour:
   _stats: {fileID: 11400000, guid: 09ac244e0092f1847b18f0b64fe22622, type: 2}
   _mover: {fileID: 3878497683875837470}
   _facing: {fileID: 3878497683875837440}
+  _hitLayer:
+    serializedVersion: 2
+    m_Bits: 64
   _idleColliders: {fileID: 1052841986073794357}
   _walkColliders: {fileID: 1052841986073794357}
   _sprintColliders: {fileID: 1052841986073794357}
+  _dashColliders: {fileID: 1052841986073794357}
   _crouchColliders: {fileID: 273835823261881981}
   _crouchWalkColliders: {fileID: 273835823261881981}
   _blockColliders: {fileID: 3316038088617238325}
+  _crouchBlockColliders: {fileID: 2766916422043525802}
   _hitStunColliders: {fileID: 1102534651570430360}
   _airHitStunColliders: {fileID: 1102534651570430360}
   _knockedDownColliders: {fileID: 3709209438092492388}
   _airKnockedDownColliders: {fileID: 3709209438092492388}
   _jumpRiseColliders: {fileID: 1052841986073794357}
-  _airborneColliders: {fileID: 607820404402242120}
+  _airborneColliders: {fileID: 1052841986073794357}
   _lightColliders: {fileID: 299804632304650312}
   _heavyColliders: {fileID: 6393484717558309415}
   _throwColliders: {fileID: 428837998195986292}
@@ -3094,10 +3100,6 @@ MonoBehaviour:
   _airLightColliders: {fileID: 2393212357526448242}
   _airHeavyColliders: {fileID: 4385385065787302165}
   _airThrowColliders: {fileID: 428837998195986292}
-  _dashColliders: {fileID: 1052841986073794357}
-  _hitLayer:
-    serializedVersion: 2
-    m_Bits: 64
   _groundDetector: {fileID: 4851650364047804634}
 --- !u!114 &4851650364047804634
 MonoBehaviour:
@@ -3115,6 +3117,18 @@ MonoBehaviour:
     serializedVersion: 2
     m_Bits: 1
   _minGroundDot: 0.65
+--- !u!114 &2664696759132402817
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 3878497683875837447}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: d96e40b0a72ced74eacc3602b5925e5d, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: 
 --- !u!1 &3878497684023685935
 GameObject:
   m_ObjectHideFlags: 0
