@@ -365,7 +365,7 @@ namespace FighterBehaviour
                 new Transition(() => airHitStun.IsFinished, () => airborne)
             );
 
-            return new FighterBehaviourPackage(transitions);
+            return new FighterBehaviourPackage(idle, transitions);
         }
 
         public override void Initialize(FighterServices services)

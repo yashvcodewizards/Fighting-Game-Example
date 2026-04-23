@@ -15,6 +15,8 @@ namespace FightTest.StateMachine
         public void Init(FighterBehaviourPackage behaviourPackage)
         {
             _transitions = behaviourPackage.Transitions;
+            
+            ChangeState(behaviourPackage.InitialState);
         }
 
         public void Tick()
@@ -24,7 +26,8 @@ namespace FightTest.StateMachine
                 return;
             }
 
-            foreach (var transition in GetTransitions(CurrentState))
+            var currentTransitions = GetTransitions(CurrentState);
+            foreach (var transition in currentTransitions)
             {
                 var next = transition.Evaluate();
                 if (next == null)

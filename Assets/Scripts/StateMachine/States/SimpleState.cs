@@ -14,7 +14,7 @@ namespace FightTest.States
 
         public void Enter()
         {
-            _colliders.EnableSet();
+            _colliders?.EnableSet();
         }
 
         public void Tick()
@@ -23,7 +23,7 @@ namespace FightTest.States
 
         public void Exit()
         {
-            _colliders.DisableSet();
+            _colliders?.DisableSet();
         }
     }
 }
