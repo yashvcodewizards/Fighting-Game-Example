@@ -1,3 +1,4 @@
+using System;
 using FightTest.StateMachine;
 using FightTest.Systems;
 
@@ -7,16 +8,20 @@ namespace FightTest.States
     {
         private readonly ColliderSet _colliders;
         private readonly CharacterMover _mover;
+        private readonly Func<float> _getMoveX;
+        private readonly Func<float> _getSpeed;
 
-        public MovingState(CharacterMover mover, float speed, ColliderSet colliders)
+        public float MoveX { get; private set; }
+        public float Speed { get; private set;}
+
+        public MovingState(CharacterMover mover, ColliderSet colliders, Func<float> getMoveX,
+            Func<float> getSpeed)
         {
             _mover = mover;
-            Speed = speed;
             _colliders = colliders;
+            _getMoveX = getMoveX;
+            _getSpeed = getSpeed;
         }
-
-        public float MoveX { get; set; }
-        public float Speed { get; set; }
 
         public void Enter()
         {
@@ -25,6 +30,9 @@ namespace FightTest.States
 
         public void Tick()
         {
+            MoveX = _getMoveX();
+            Speed = _getSpeed();
+            
             _mover.Move(MoveX, Speed);
         }
 
