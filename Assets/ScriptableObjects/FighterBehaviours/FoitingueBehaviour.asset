@@ -41,10 +41,10 @@ MonoBehaviour:
   BackDashDuration: 0.2
   JumpForce: 10
   MaxHealth: 100
-  ThrowAttack: {fileID: 0}
-  LightAttack: {fileID: 0}
-  HeavyAttack: {fileID: 0}
-  CrouchLightAttack: {fileID: 0}
-  CrouchHeavyAttack: {fileID: 0}
-  AirLightAttack: {fileID: 0}
-  AirHeavyAttack: {fileID: 0}
+  ThrowAttack: {fileID: 11400000, guid: c97b76bf14262954ab8f879621ba1593, type: 2}
+  LightAttack: {fileID: 11400000, guid: 40d103f77a242c94cb5b7fe09a7d342e, type: 2}
+  HeavyAttack: {fileID: 11400000, guid: c29bdf3a7a0ea4d4fbfe70cea1058289, type: 2}
+  CrouchLightAttack: {fileID: 11400000, guid: 7f04b49e0a8aad2498900b2157a46883, type: 2}
+  CrouchHeavyAttack: {fileID: 11400000, guid: 701838e83ab67da4081db6b5dd302709, type: 2}
+  AirLightAttack: {fileID: 11400000, guid: 45742f9931e480b4c88fb75b8d2f7d1b, type: 2}
+  AirHeavyAttack: {fileID: 11400000, guid: c2f089226829abc45a62479709507993, type: 2}
