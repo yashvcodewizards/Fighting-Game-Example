@@ -2,6 +2,7 @@
 using FightTest.Data;
 using FightTest.StateMachine;
 using FightTest.States;
+using FightTest.Systems;
 using UnityEngine;
 
 namespace FighterBehaviour
@@ -9,6 +10,35 @@ namespace FighterBehaviour
     [CreateAssetMenu(menuName = "FightTest/FighterBehaviour/FoitingueBehaviour")]
     public class FoitingueBehaviourDefinition : FighterBehaviourDefinition
     {
+        #region colliders test
+
+        [SerializeField] private ColliderSet _idleColliders;
+
+        [SerializeField] private ColliderSet _walkColliders;
+        [SerializeField] private ColliderSet _sprintColliders;
+        [SerializeField] private ColliderSet _dashColliders;
+        [SerializeField] private ColliderSet _crouchColliders;
+        [SerializeField] private ColliderSet _crouchWalkColliders;
+        [SerializeField] private ColliderSet _blockColliders;
+        [SerializeField] private ColliderSet _crouchBlockColliders;
+        [SerializeField] private ColliderSet _hitStunColliders;
+        [SerializeField] private ColliderSet _airHitStunColliders;
+        [SerializeField] private ColliderSet _knockedDownColliders;
+        [SerializeField] private ColliderSet _airKnockedDownColliders;
+        [SerializeField] private ColliderSet _jumpRiseColliders;
+        [SerializeField] private ColliderSet _airborneColliders;
+        [SerializeField] private ColliderSet _lightColliders;
+        [SerializeField] private ColliderSet _heavyColliders;
+        [SerializeField] private ColliderSet _throwColliders;
+        [SerializeField] private ColliderSet _crouchLightColliders;
+        [SerializeField] private ColliderSet _crouchHeavyColliders;
+        [SerializeField] private ColliderSet _airLightColliders;
+        [SerializeField] private ColliderSet _airHeavyColliders;
+        [SerializeField] private ColliderSet _airThrowColliders;
+        
+
+        #endregion
+        
         [Header("Movement")]
         public float MoveSpeed = 4f;
         public float WalkBackSpeed = 2.5f;
@@ -42,7 +72,7 @@ namespace FighterBehaviour
                 services.Mover,
                 _walkColliders,
                 () => context.Frame.MoveX,
-                () => IsWalkingBack()
+                () => services.Queries.IsWalkingBack()
                     ? WalkBackSpeed
                     : MoveSpeed
             );
@@ -55,7 +85,7 @@ namespace FighterBehaviour
             var crouchWalk = new MovingState(
                 services.Mover,
                 _crouchWalkColliders,
-                () => IsWalkingBack() ? 0f : context.Frame.MoveX,
+                () => services.Queries.IsWalkingBack() ? 0f : context.Frame.MoveX,
                 () => MoveSpeed
             );
 
