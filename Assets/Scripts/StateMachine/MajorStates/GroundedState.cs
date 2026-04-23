@@ -6,7 +6,7 @@ namespace FightTest.States
     {
         public GroundState(IState defaultSubState)
         {
-            SubMachine.Init(defaultSubState);
+            //SubMachine.Init(defaultSubState);
         }
 
         public StateMachine.StateMachine SubMachine { get; } = new StateMachine.StateMachine();

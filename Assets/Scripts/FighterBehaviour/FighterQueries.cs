@@ -30,7 +30,8 @@ namespace FighterBehaviour
         
         public bool IsAirborne()
         {
-            return _services.Root.CurrentState == airborn;
+            return _services.Root.CurrentState is AirbornState;
+            //return _services.Root.CurrentState == airborn;
         }
         
         public bool IsGroundSubstateAttack() // for now checek against attack, dunno if in air
@@ -47,7 +48,8 @@ namespace FighterBehaviour
         public bool IsHitStunned()
         {
             var state = _services.Root.CurrentState;
-            return state == hitStun;
+            return state is HitStunState;
+            //return state == hitStun;
         }
     }
 }

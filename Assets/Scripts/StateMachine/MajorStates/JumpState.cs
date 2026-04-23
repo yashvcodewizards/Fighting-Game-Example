@@ -16,7 +16,7 @@ namespace FightTest.States
             _mover = mover;
             _jumpForce = jumpForce;
             _defaultSubState = defaultSubState;
-            SubMachine.Init(defaultSubState);
+            //SubMachine.Init(defaultSubState);
         }
 
         public StateMachine.StateMachine SubMachine { get; } = new StateMachine.StateMachine();
