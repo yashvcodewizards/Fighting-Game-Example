@@ -9,7 +9,7 @@ using UnityEngine;
 namespace FighterBehaviour
 {
     [CreateAssetMenu(menuName = "FightTest/FighterBehaviour/FoitingueBehaviour")]
-    public class ExampleBehaviourDefinition : FighterBehaviourDefinition
+    public class FoitingueBehaviourDefinition : FighterBehaviourDefinition
     {
         #region colliders test
 

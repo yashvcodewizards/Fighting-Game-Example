@@ -30,7 +30,7 @@ namespace FightTest.States
             IsFinished = false;
             _timer = 0f;
             _lockedMoveX = MoveX;
-            _colliders.EnableSet();
+            _colliders?.EnableSet();
         }
 
         public void Tick(FighterRuntime runtime)
@@ -47,7 +47,7 @@ namespace FightTest.States
         {
             IsFinished = false;
             _mover.Stop();
-            _colliders.DisableSet();
+            _colliders?.DisableSet();
         }
     }
 }

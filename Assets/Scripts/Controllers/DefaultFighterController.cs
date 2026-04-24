@@ -25,7 +25,7 @@ namespace FightTest.Controllers
         private FighterBehaviourContext _context;
         private FighterRuntime _runtime;
         public FighterQueries Queries => _runtime.Queries;
-
+        
         private void Awake()
         {
             _hitStunTimer = new HitStunTimer();
