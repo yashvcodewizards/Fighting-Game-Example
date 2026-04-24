@@ -194,7 +194,7 @@ namespace FighterBehaviour
             RegisterTransitions(
                 ground,
                 new Transition(
-                    () => queries.IsGrounded() && context.Frame.Jump && !queries.IsGroundSubstateAttack() && !queries.IsHitStunned(),
+                    () => queries.CanJumpFromGround(),
                     () =>
                     {
                         airborn.Configure(context.Frame.MoveX * MoveSpeed);
@@ -205,7 +205,7 @@ namespace FighterBehaviour
             RegisterTransitions(
                 airborn,
                 new Transition(
-                    () => queries.IsGrounded() && services.Rb.velocity.y <= 0.1f,
+                    () => queries.IsLanding(),
                     () =>
                     {
                         var airSubState = airborn.SubMachine.CurrentState;
@@ -227,13 +227,11 @@ namespace FighterBehaviour
                     })
             );
 
-            var groundSm = ground.SubMachine;
-
             // Ground transitions
             RegisterTransitions(
                 idle,
-                new Transition(() => context.Frame.BackDash && queries.IsWalkingBack(), () => dash),
-                new Transition(() => context.Frame.MoveX != 0f && context.Frame is { Duck: false, LightAttack: false, HeavyAttack: false }, () => walk),
+                new Transition(() => queries.IsTryingToBackDash() && queries.IsWalkingBack(), () => dash),
+                new Transition(() => queries.CanWalkFromIdle(), () => walk),
                 new Transition(() => context.Frame.Duck, () => crouch),
                 new Transition(() => context.Frame.LightAttack, () => lightAttack),
                 new Transition(() => context.Frame.HeavyAttack, () => heavyAttack),
@@ -242,41 +240,41 @@ namespace FighterBehaviour
 
             RegisterTransitions(
                 walk,
-                new Transition(() => context.Frame.BackDash && queries.IsWalkingBack(), () => dash),
-                new Transition(() => context.Frame.Sprint && !context.Frame.Duck && queries.IsMovingForward(), () => sprint),
-                new Transition(() => context.Frame is { MoveX: 0f, Duck: false }, () => idle),
-                new Transition(() => context.Frame.Duck && (context.Frame.MoveX == 0f || queries.IsWalkingBack()), () => crouch),
-                new Transition(() => context.Frame.Duck && queries.IsMovingForward(), () => crouchWalk),
-                new Transition(() => context.Frame.LightAttack, () => lightAttack),
-                new Transition(() => context.Frame.HeavyAttack, () => heavyAttack),
-                new Transition(() => context.Frame.Throw, () => throwAttack)
+                new Transition(() => queries.IsTryingToBackDash() && queries.IsWalkingBack(), () => dash),
+                new Transition(() => queries.IsTryingToSprint() && !queries.IsDucking() && queries.IsMovingForward(), () => sprint),
+                new Transition(() => queries.IsNeutral() && !queries.IsDucking(), () => idle),
+                new Transition(() => queries.IsDucking() && (queries.IsNeutral() || queries.IsWalkingBack()), () => crouch),
+                new Transition(() => queries.IsDucking() && queries.IsMovingForward(), () => crouchWalk),
+                new Transition(() => queries.IsTryingLightAttack(), () => lightAttack),
+                new Transition(() => queries.IsTryingHeavyAttack(), () => heavyAttack),
+                new Transition(() => queries.IsTryingThrow(), () => throwAttack)
             );
 
             RegisterTransitions(
                 sprint,
-                new Transition(() => !queries.IsMovingForward() || !context.Frame.Sprint, () => idle),
-                new Transition(() => context.Frame.Duck, () => crouch),
-                new Transition(() => context.Frame.LightAttack, () => lightAttack),
-                new Transition(() => context.Frame.HeavyAttack, () => heavyAttack),
-                new Transition(() => context.Frame.Throw, () => throwAttack)
+                new Transition(() => !queries.IsMovingForward() || !queries.IsTryingToSprint(), () => idle),
+                new Transition(() => queries.IsDucking(), () => crouch),
+                new Transition(() => queries.IsTryingLightAttack(), () => lightAttack),
+                new Transition(() => queries.IsTryingHeavyAttack(), () => heavyAttack),
+                new Transition(() => queries.IsTryingThrow(), () => throwAttack)
             );
 
             RegisterTransitions(
                 crouch,
-                new Transition(() => context.Frame is { Duck: false, MoveX: 0f }, () => idle),
-                new Transition(() => !context.Frame.Duck && context.Frame.MoveX != 0f, () => walk),
-                new Transition(() => context.Frame.Duck && queries.IsMovingForward(), () => crouchWalk),
-                new Transition(() => context.Frame.LightAttack, () => crouchLightAttack),
-                new Transition(() => context.Frame.HeavyAttack, () => crouchHeavyAttack)
+                new Transition(() => !queries.IsDucking() && queries.IsNeutral(), () => idle),
+                new Transition(() => !queries.IsDucking() && queries.HasMovementInput(), () => walk),
+                new Transition(() => queries.IsDucking() && queries.IsMovingForward(), () => crouchWalk),
+                new Transition(() => queries.IsTryingLightAttack(), () => crouchLightAttack),
+                new Transition(() => queries.IsTryingHeavyAttack(), () => crouchHeavyAttack)
             );
 
             RegisterTransitions(
                 crouchWalk,
-                new Transition(() => !context.Frame.Duck && context.Frame.MoveX == 0f, () => idle),
-                new Transition(() => !context.Frame.Duck && context.Frame.MoveX != 0f, () => walk),
-                new Transition(() => context.Frame.Duck && (context.Frame.MoveX == 0f || queries.IsWalkingBack()), () => crouch),
-                new Transition(() => context.Frame.LightAttack, () => crouchLightAttack),
-                new Transition(() => context.Frame.HeavyAttack, () => crouchHeavyAttack)
+                new Transition(() => !queries.IsDucking() && queries.IsNeutral(), () => idle),
+                new Transition(() => !queries.IsDucking() && queries.HasMovementInput(), () => walk),
+                new Transition(() => queries.IsDucking() && (queries.IsNeutral() || queries.IsWalkingBack()), () => crouch),
+                new Transition(() => queries.IsTryingLightAttack(), () => crouchLightAttack),
+                new Transition(() => queries.IsTryingHeavyAttack(), () => crouchHeavyAttack)
             );
 
             RegisterTransitions(
@@ -328,23 +326,21 @@ namespace FighterBehaviour
                 knockedDown,
                 new Transition(() => knockedDown.IsFinished, () => idle)
             );
-
-            var airSm = airborn.SubMachine;
-
+            
             // Air transitions
             RegisterTransitions(
                 jumpRise,
-                new Transition(() => services.Rb.velocity.y <= 0f, () => airborne),
-                new Transition(() => context.Frame.LightAttack, () => airLightAttack),
-                new Transition(() => context.Frame.HeavyAttack, () => airHeavyAttack),
-                new Transition(() => context.Frame.Throw, () => airThrowAttack)
+                new Transition(() => queries.IsFalling(), () => airborne),
+                new Transition(() => queries.IsTryingLightAttack(), () => airLightAttack),
+                new Transition(() => queries.IsTryingHeavyAttack(), () => airHeavyAttack),
+                new Transition(() => queries.IsTryingThrow(), () => airThrowAttack)
             );
 
             RegisterTransitions(
                 airborne,
-                new Transition(() => context.Frame.LightAttack, () => airLightAttack),
-                new Transition(() => context.Frame.HeavyAttack, () => airHeavyAttack),
-                new Transition(() => context.Frame.Throw, () => airThrowAttack)
+                new Transition(() => queries.IsTryingLightAttack(), () => airLightAttack),
+                new Transition(() => queries.IsTryingHeavyAttack(), () => airHeavyAttack),
+                new Transition(() => queries.IsTryingThrow(), () => airThrowAttack)
             );
 
             RegisterTransitions(

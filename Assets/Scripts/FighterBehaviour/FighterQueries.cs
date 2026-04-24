@@ -51,5 +51,76 @@ namespace FighterBehaviour
             return state is HitStunState;
             //return state == hitStun;
         }
+        
+        public bool HasMovementInput()
+        {
+            return _context.Frame.MoveX != 0f;
+        }
+
+        public bool IsNeutral()
+        {
+            return _context.Frame.MoveX == 0f;
+        }
+
+        public bool IsDucking()
+        {
+            return _context.Frame.Duck;
+        }
+
+        public bool IsTryingToJump()
+        {
+            return _context.Frame.Jump;
+        }
+
+        public bool IsTryingToBackDash()
+        {
+            return _context.Frame.BackDash;
+        }
+
+        public bool IsTryingToSprint()
+        {
+            return _context.Frame.Sprint;
+        }
+
+        public bool IsTryingLightAttack()
+        {
+            return _context.Frame.LightAttack;
+        }
+
+        public bool IsTryingHeavyAttack()
+        {
+            return _context.Frame.HeavyAttack;
+        }
+
+        public bool IsTryingThrow()
+        {
+            return _context.Frame.Throw;
+        }
+
+        public bool IsFalling()
+        {
+            return _services.Rb.velocity.y <= 0f;
+        }
+
+        public bool IsLanding()
+        {
+            return IsGrounded() && _services.Rb.velocity.y <= 0.1f;
+        }
+
+        public bool CanWalkFromIdle()
+        {
+            return HasMovementInput()
+                   && !IsDucking()
+                   && !IsTryingLightAttack()
+                   && !IsTryingHeavyAttack();
+        }
+
+        public bool CanJumpFromGround()
+        {
+            return IsGrounded()
+                   && IsTryingToJump()
+                   && !IsGroundSubstateAttack()
+                   && !IsHitStunned();
+        }
     }
 }
