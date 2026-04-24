@@ -57,8 +57,6 @@ namespace FightTest.Controllers
         {
             _context.Frame = _inputProvider?.GetFrame() ?? default;
 
-            Debug.Log($"Frame MoveX: {_context.Frame.MoveX}");
-            
             _root.Tick();
         }
     }

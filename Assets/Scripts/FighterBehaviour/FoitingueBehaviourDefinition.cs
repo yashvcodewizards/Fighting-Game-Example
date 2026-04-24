@@ -233,16 +233,7 @@ namespace FighterBehaviour
             RegisterTransitions(
                 idle,
                 new Transition(() => context.Frame.BackDash && queries.IsWalkingBack(), () => dash),
-                new Transition(
-                    () =>
-                    {
-                        var result = context.Frame.MoveX != 0f &&
-                                     context.Frame is { Duck: false, LightAttack: false, HeavyAttack: false };
-
-                        Debug.Log($"Idle -> Walk check: MoveX={context.Frame.MoveX}, result={result}");
-                        return result;
-                    },
-                    () => walk),
+                new Transition(() => context.Frame.MoveX != 0f && context.Frame is { Duck: false, LightAttack: false, HeavyAttack: false }, () => walk),
                 new Transition(() => context.Frame.Duck, () => crouch),
                 new Transition(() => context.Frame.LightAttack, () => lightAttack),
                 new Transition(() => context.Frame.HeavyAttack, () => heavyAttack),
