@@ -1,5 +1,6 @@
 using System.Collections.Generic;
 using FighterBehaviour;
+using UnityEngine;
 
 namespace FightTest.StateMachine
 {
@@ -44,6 +45,15 @@ namespace FightTest.StateMachine
 
         public void ChangeState(IState next)
         {
+            if (next == null)
+            {
+                Debug.LogWarning("Tried to change to null state.");
+                return;
+            }
+
+            Debug.Log($"State change: {CurrentState?.GetType().Name ?? "NULL"} -> {next.GetType().Name}");
+
+            
             ExitDeep(CurrentState);
             CurrentState = next;
             next.Enter();
