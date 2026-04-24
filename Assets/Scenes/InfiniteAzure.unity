@@ -3071,7 +3071,7 @@ MonoBehaviour:
   m_Name: 
   m_EditorClassIdentifier: 
   _fighterDefinition: {fileID: 11400000, guid: 4f63f916ad165ac4a96d8657a33f65da, type: 2}
-  _inputProviderBehaviour: {fileID: 3722673737033375498}
+  _inputProviderBehaviour: {fileID: 3722673737033375509}
   _health: {fileID: 3722673737033375496}
   _mover: {fileID: 3722673737033375498}
   _facing: {fileID: 3722673737033375508}
