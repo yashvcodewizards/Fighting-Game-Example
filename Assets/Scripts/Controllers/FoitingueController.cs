@@ -23,7 +23,8 @@ namespace FightTest.Controllers
         private StateMachine.StateMachine _root;
         private FighterServices _services;
         private FighterBehaviourContext _context;
-        private FighterQueries _queries;
+        private FighterRuntime _runtime;
+        public FighterQueries Queries => _runtime.Queries;
 
         private void Awake()
         {
@@ -40,14 +41,15 @@ namespace FightTest.Controllers
                 _rb,
                 _root,
                 gameObject,
-                _hitStunTimer,
-                _queries
+                _hitStunTimer
             );
 
             _context = new FighterBehaviourContext();
+            _runtime = new FighterRuntime(_services, _context);
 
             _fighterDefinition.Initialize(_services);
-            var package = _fighterDefinition.Build(_services, _context);
+            
+            var package = _fighterDefinition.Build(_runtime);
             _root.Init(package);
         }
 
@@ -55,6 +57,8 @@ namespace FightTest.Controllers
         {
             _context.Frame = _inputProvider?.GetFrame() ?? default;
 
+            Debug.Log($"Frame MoveX: {_context.Frame.MoveX}");
+            
             _root.Tick();
         }
     }

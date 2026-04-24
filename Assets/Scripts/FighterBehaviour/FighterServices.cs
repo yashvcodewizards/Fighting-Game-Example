@@ -19,7 +19,6 @@ namespace FighterBehaviour
         public StateMachine Root { get; }
         public GameObject Self { get; }
         public HitStunTimer HitStunTimer { get; }
-        public FighterQueries Queries { get; }
 
         public FighterServices(
             MonoBehaviour inputProviderBehaviour,
@@ -31,8 +30,7 @@ namespace FighterBehaviour
             Rigidbody2D rb,
             StateMachine root,
             GameObject self,
-            HitStunTimer hitStunTimer,
-            FighterQueries queries)
+            HitStunTimer hitStunTimer)
         {
             InputProviderBehaviour = inputProviderBehaviour;
             Health = health;
@@ -44,7 +42,6 @@ namespace FighterBehaviour
             Root = root;
             Self = self;
             HitStunTimer = hitStunTimer;
-            Queries = queries;
         }
     }
 }

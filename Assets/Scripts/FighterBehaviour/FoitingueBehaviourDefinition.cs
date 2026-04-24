@@ -59,8 +59,12 @@ namespace FighterBehaviour
         public AttackData AirLightAttack;
         public AttackData AirHeavyAttack;
         
-        public override FighterBehaviourPackage Build(FighterServices services, FighterBehaviourContext context)
+        public override FighterBehaviourPackage Build(FighterRuntime runtime)
         {
+            var services = runtime.Services;
+            var context = runtime.Context;
+            var queries = runtime.Queries;
+            
             // Simple states
             var idle = new SimpleState(_idleColliders);
             var crouch = new SimpleState(_crouchColliders);
@@ -72,7 +76,7 @@ namespace FighterBehaviour
                 services.Mover,
                 _walkColliders,
                 () => context.Frame.MoveX,
-                () => services.Queries.IsWalkingBack()
+                () => queries.IsWalkingBack()
                     ? WalkBackSpeed
                     : MoveSpeed
             );
@@ -85,7 +89,7 @@ namespace FighterBehaviour
             var crouchWalk = new MovingState(
                 services.Mover,
                 _crouchWalkColliders,
-                () => services.Queries.IsWalkingBack() ? 0f : context.Frame.MoveX,
+                () => queries.IsWalkingBack() ? 0f : context.Frame.MoveX,
                 () => MoveSpeed
             );
 
@@ -190,7 +194,7 @@ namespace FighterBehaviour
             RegisterTransitions(
                 ground,
                 new Transition(
-                    () => services.Queries.IsGrounded() && context.Frame.Jump && !services.Queries.IsGroundSubstateAttack() && !services.Queries.IsHitStunned(),
+                    () => queries.IsGrounded() && context.Frame.Jump && !queries.IsGroundSubstateAttack() && !queries.IsHitStunned(),
                     () =>
                     {
                         airborn.Configure(context.Frame.MoveX * MoveSpeed);
@@ -201,7 +205,7 @@ namespace FighterBehaviour
             RegisterTransitions(
                 airborn,
                 new Transition(
-                    () => services.Queries.IsGrounded() && services.Rb.velocity.y <= 0.1f,
+                    () => queries.IsGrounded() && services.Rb.velocity.y <= 0.1f,
                     () =>
                     {
                         var airSubState = airborn.SubMachine.CurrentState;
@@ -228,9 +232,16 @@ namespace FighterBehaviour
             // Ground transitions
             RegisterTransitions(
                 idle,
-                new Transition(() => context.Frame.BackDash && services.Queries.IsWalkingBack(), () => dash),
+                new Transition(() => context.Frame.BackDash && queries.IsWalkingBack(), () => dash),
                 new Transition(
-                    () => context.Frame.MoveX != 0f && context.Frame is { Duck: false, LightAttack: false, HeavyAttack: false },
+                    () =>
+                    {
+                        var result = context.Frame.MoveX != 0f &&
+                                     context.Frame is { Duck: false, LightAttack: false, HeavyAttack: false };
+
+                        Debug.Log($"Idle -> Walk check: MoveX={context.Frame.MoveX}, result={result}");
+                        return result;
+                    },
                     () => walk),
                 new Transition(() => context.Frame.Duck, () => crouch),
                 new Transition(() => context.Frame.LightAttack, () => lightAttack),
@@ -240,11 +251,11 @@ namespace FighterBehaviour
 
             RegisterTransitions(
                 walk,
-                new Transition(() => context.Frame.BackDash && services.Queries.IsWalkingBack(), () => dash),
-                new Transition(() => context.Frame.Sprint && !context.Frame.Duck && services.Queries.IsMovingForward(), () => sprint),
+                new Transition(() => context.Frame.BackDash && queries.IsWalkingBack(), () => dash),
+                new Transition(() => context.Frame.Sprint && !context.Frame.Duck && queries.IsMovingForward(), () => sprint),
                 new Transition(() => context.Frame is { MoveX: 0f, Duck: false }, () => idle),
-                new Transition(() => context.Frame.Duck && (context.Frame.MoveX == 0f || services.Queries.IsWalkingBack()), () => crouch),
-                new Transition(() => context.Frame.Duck && services.Queries.IsMovingForward(), () => crouchWalk),
+                new Transition(() => context.Frame.Duck && (context.Frame.MoveX == 0f || queries.IsWalkingBack()), () => crouch),
+                new Transition(() => context.Frame.Duck && queries.IsMovingForward(), () => crouchWalk),
                 new Transition(() => context.Frame.LightAttack, () => lightAttack),
                 new Transition(() => context.Frame.HeavyAttack, () => heavyAttack),
                 new Transition(() => context.Frame.Throw, () => throwAttack)
@@ -252,7 +263,7 @@ namespace FighterBehaviour
 
             RegisterTransitions(
                 sprint,
-                new Transition(() => !services.Queries.IsMovingForward() || !context.Frame.Sprint, () => idle),
+                new Transition(() => !queries.IsMovingForward() || !context.Frame.Sprint, () => idle),
                 new Transition(() => context.Frame.Duck, () => crouch),
                 new Transition(() => context.Frame.LightAttack, () => lightAttack),
                 new Transition(() => context.Frame.HeavyAttack, () => heavyAttack),
@@ -263,7 +274,7 @@ namespace FighterBehaviour
                 crouch,
                 new Transition(() => context.Frame is { Duck: false, MoveX: 0f }, () => idle),
                 new Transition(() => !context.Frame.Duck && context.Frame.MoveX != 0f, () => walk),
-                new Transition(() => context.Frame.Duck && services.Queries.IsMovingForward(), () => crouchWalk),
+                new Transition(() => context.Frame.Duck && queries.IsMovingForward(), () => crouchWalk),
                 new Transition(() => context.Frame.LightAttack, () => crouchLightAttack),
                 new Transition(() => context.Frame.HeavyAttack, () => crouchHeavyAttack)
             );
@@ -272,7 +283,7 @@ namespace FighterBehaviour
                 crouchWalk,
                 new Transition(() => !context.Frame.Duck && context.Frame.MoveX == 0f, () => idle),
                 new Transition(() => !context.Frame.Duck && context.Frame.MoveX != 0f, () => walk),
-                new Transition(() => context.Frame.Duck && (context.Frame.MoveX == 0f || services.Queries.IsWalkingBack()), () => crouch),
+                new Transition(() => context.Frame.Duck && (context.Frame.MoveX == 0f || queries.IsWalkingBack()), () => crouch),
                 new Transition(() => context.Frame.LightAttack, () => crouchLightAttack),
                 new Transition(() => context.Frame.HeavyAttack, () => crouchHeavyAttack)
             );
