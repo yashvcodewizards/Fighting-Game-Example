@@ -1,4 +1,5 @@
 ﻿using FightTest.States;
+using FightTest.States.FoitingueStates;
 
 namespace FighterBehaviour
 {
@@ -30,7 +31,7 @@ namespace FighterBehaviour
         
         public bool IsAirborne()
         {
-            return _services.Root.CurrentState is AirbornState;
+            return _services.Root.CurrentState is JumpState;
             //return _services.Root.CurrentState == airborn;
         }
         

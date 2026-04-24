@@ -1,3 +1,4 @@
+using FighterBehaviour;
 using FightTest.StateMachine;
 using FightTest.Systems;
 
@@ -12,16 +13,16 @@ namespace FightTest.States
             _colliders = colliders;
         }
 
-        public void Enter()
+        public void Enter(FighterRuntime runtime)
         {
             _colliders?.EnableSet();
         }
 
-        public void Tick()
+        public void Tick(FighterRuntime runtime)
         {
         }
 
-        public void Exit()
+        public void Exit(FighterRuntime runtime)
         {
             _colliders?.DisableSet();
         }

@@ -2,13 +2,14 @@
 using FightTest.Data;
 using FightTest.StateMachine;
 using FightTest.States;
+using FightTest.States.FoitingueStates;
 using FightTest.Systems;
 using UnityEngine;
 
 namespace FighterBehaviour
 {
     [CreateAssetMenu(menuName = "FightTest/FighterBehaviour/FoitingueBehaviour")]
-    public class FoitingueBehaviourDefinition : FighterBehaviourDefinition
+    public class ExampleBehaviourDefinition : FighterBehaviourDefinition
     {
         #region colliders test
 
@@ -35,8 +36,6 @@ namespace FighterBehaviour
         [SerializeField] private ColliderSet _airLightColliders;
         [SerializeField] private ColliderSet _airHeavyColliders;
         [SerializeField] private ColliderSet _airThrowColliders;
-        
-
         #endregion
         
         [Header("Movement")]
@@ -68,7 +67,7 @@ namespace FighterBehaviour
             // Simple states
             var idle = new SimpleState(_idleColliders);
             var crouch = new SimpleState(_crouchColliders);
-            var jumpRise = new SimpleState(_jumpRiseColliders);
+            var jumpRise = new JumpState(_jumpRiseColliders, JumpForce);
             var airborne = new SimpleState(_airborneColliders);
 
             // Movement states
@@ -175,8 +174,8 @@ namespace FighterBehaviour
                 services.Mover);
 
             // Root states
-            var ground = new GroundState(idle);
-            var airborn = new AirbornState(jumpRise, services.Mover, JumpForce);
+            /*var ground = new GroundState(idle);
+            var airborn = new AirbornState(jumpRise, services.Mover, JumpForce);*/
 
             var transitions = new Dictionary<IState, List<ITransition>>();
 
@@ -191,41 +190,19 @@ namespace FighterBehaviour
             }
 
             // Root transitions
-            RegisterTransitions(
-                ground,
-                new Transition(
-                    () => queries.CanJumpFromGround(),
-                    () =>
-                    {
-                        airborn.Configure(context.Frame.MoveX * MoveSpeed);
-                        return airborn;
-                    })
-            );
-
-            RegisterTransitions(
-                airborn,
-                new Transition(
-                    () => queries.IsLanding(),
-                    () =>
-                    {
-                        var airSubState = airborn.SubMachine.CurrentState;
-
-                        if (airSubState == airKnockedDown)
-                        {
-                            ground.SubMachine.ChangeState(knockedDown);
-                        }
-                        else if (airSubState == airHitStun)
-                        {
-                            ground.SubMachine.ChangeState(hitStun);
-                        }
-                        else
-                        {
-                            ground.SubMachine.ChangeState(idle);
-                        }
-
-                        return ground;
-                    })
-            );
+            RegisterCanJumpTransition(idle);
+            RegisterCanJumpTransition(walk);
+            RegisterCanJumpTransition(sprint);
+            RegisterCanJumpTransition(crouch);
+            RegisterCanJumpTransition(crouchWalk);
+            
+            RegisterLandingTransition(jumpRise, idle);
+            RegisterLandingTransition(airborne, idle);
+            RegisterLandingTransition(airLightAttack, idle);
+            RegisterLandingTransition(airHeavyAttack, idle);
+            RegisterLandingTransition(airThrowAttack, idle);
+            RegisterLandingTransition(airHitStun, hitStun);
+            RegisterLandingTransition(airKnockedDown, knockedDown);
 
             // Ground transitions
             RegisterTransitions(
@@ -362,6 +339,28 @@ namespace FighterBehaviour
                 airHitStun,
                 new Transition(() => airHitStun.IsFinished, () => airborne)
             );
+            
+            void RegisterCanJumpTransition(IState state)
+            {
+                RegisterTransitions(
+                    state,
+                    new Transition(
+                        () => queries.CanJumpFromGround(),
+                        () =>
+                        {
+                            jumpRise.Configure(context.Frame.MoveX * MoveSpeed);
+                            return jumpRise;
+                        })
+                );
+            }
+
+            void RegisterLandingTransition(IState state, IState landState)
+            {
+                RegisterTransitions(
+                    state,
+                    new Transition(() => queries.IsLanding(), () => landState)
+                );
+            }
 
             return new FighterBehaviourPackage(idle, transitions);
         }

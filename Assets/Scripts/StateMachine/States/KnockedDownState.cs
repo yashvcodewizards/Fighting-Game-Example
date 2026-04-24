@@ -1,3 +1,4 @@
+using FighterBehaviour;
 using FightTest.StateMachine;
 using FightTest.Systems;
 
@@ -18,14 +19,14 @@ namespace FightTest.States
         public bool IsFinished { get; private set; }
         public bool IsInvulnerable => true;
 
-        public void Enter()
+        public void Enter(FighterRuntime runtime)
         {
             IsFinished = false;
             _remainingTicks = _durationTicks;
             _colliders.EnableSet();
         }
 
-        public void Tick()
+        public void Tick(FighterRuntime runtime)
         {
             if (_durationTicks <= 0)
             {
@@ -39,7 +40,7 @@ namespace FightTest.States
             }
         }
 
-        public void Exit()
+        public void Exit(FighterRuntime runtime)
         {
             _colliders.DisableSet();
             IsFinished = false;

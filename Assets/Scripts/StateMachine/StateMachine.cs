@@ -11,11 +11,14 @@ namespace FightTest.StateMachine
         private Dictionary<IState, List<ITransition>> _transitions =
             new Dictionary<IState, List<ITransition>>();
 
+        private FighterRuntime _runtime;
+
         public IState CurrentState { get; private set; }
 
-        public void Init(FighterBehaviourPackage behaviourPackage)
+        public void Init(FighterBehaviourPackage behaviourPackage, FighterRuntime runtime)
         {
             _transitions = behaviourPackage.Transitions;
+            _runtime = runtime;
             
             ChangeState(behaviourPackage.InitialState);
         }
@@ -40,7 +43,7 @@ namespace FightTest.StateMachine
                 return;
             }
 
-            CurrentState.Tick();
+            CurrentState.Tick(_runtime);
         }
 
         public void ChangeState(IState next)
@@ -54,19 +57,19 @@ namespace FightTest.StateMachine
             Debug.Log($"State change: {CurrentState?.GetType().Name ?? "NULL"} -> {next.GetType().Name}");
 
             
-            ExitDeep(CurrentState);
+            Exit(CurrentState);
             CurrentState = next;
-            next.Enter();
+            next.Enter(_runtime);
         }
 
-        private static void ExitDeep(IState state)
+        private void Exit(IState state)
         {
             if (state == null)
             {
                 return;
             }
 
-            state.Exit();
+            state.Exit(_runtime);
         }
 
         public void RegisterTransitions(IState state, params ITransition[] transitions)

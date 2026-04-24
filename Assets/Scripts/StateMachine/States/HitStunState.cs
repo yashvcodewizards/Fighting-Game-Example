@@ -1,3 +1,4 @@
+using FighterBehaviour;
 using FightTest.StateMachine;
 using FightTest.Systems;
 
@@ -16,17 +17,17 @@ namespace FightTest.States
 
         public bool IsFinished => _timer.IsFinished;
 
-        public void Enter()
+        public void Enter(FighterRuntime runtime)
         {
             _colliders.EnableSet();
         }
 
-        public void Tick()
+        public void Tick(FighterRuntime runtime)
         {
             _timer.Tick();
         }
 
-        public void Exit()
+        public void Exit(FighterRuntime runtime)
         {
             _colliders.DisableSet();
         }

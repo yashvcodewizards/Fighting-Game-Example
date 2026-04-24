@@ -1,3 +1,4 @@
+using FighterBehaviour;
 using FightTest.StateMachine;
 using FightTest.Systems;
 using UnityEngine;
@@ -24,7 +25,7 @@ namespace FightTest.States
         public float MoveX { get; set; }
         public bool IsFinished { get; private set; }
 
-        public void Enter()
+        public void Enter(FighterRuntime runtime)
         {
             IsFinished = false;
             _timer = 0f;
@@ -32,7 +33,7 @@ namespace FightTest.States
             _colliders.EnableSet();
         }
 
-        public void Tick()
+        public void Tick(FighterRuntime runtime)
         {
             _timer += Time.deltaTime;
             _mover.Move(_lockedMoveX, _speed);
@@ -42,7 +43,7 @@ namespace FightTest.States
             }
         }
 
-        public void Exit()
+        public void Exit(FighterRuntime runtime)
         {
             IsFinished = false;
             _mover.Stop();

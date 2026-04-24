@@ -1,3 +1,4 @@
+using FighterBehaviour;
 using FightTest.Data;
 using FightTest.StateMachine;
 using FightTest.Systems;
@@ -46,17 +47,17 @@ namespace FightTest.States
 
         private bool _hasLunged;
 
-        public void Enter()
+        public void Enter(FighterRuntime runtime)
         {
             IsFinished = false;
             _hasHitThisSwing = false;
             _wasInActive = false;
             _hasLunged = false;
             _timer = 0f;
-            _colliders.EnableSet();
+            _colliders?.EnableSet();
         }
 
-        public void Tick()
+        public void Tick(FighterRuntime runtime)
         {
             _timer += Time.deltaTime;
 
@@ -73,12 +74,12 @@ namespace FightTest.States
 
             if (inActive && !_wasInActive)
             {
-                _colliders.EnableHitboxes();
+                _colliders?.EnableHitboxes();
                 _wasInActive = true;
             }
             else if (!inActive && _wasInActive)
             {
-                _colliders.DisableHitboxes();
+                _colliders?.DisableHitboxes();
             }
 
             if (inActive && !_hasHitThisSwing)
@@ -92,9 +93,9 @@ namespace FightTest.States
             }
         }
 
-        public void Exit()
+        public void Exit(FighterRuntime runtime)
         {
-            _colliders.DisableSet();
+            _colliders?.DisableSet();
             IsFinished = false;
         }
 
@@ -104,6 +105,11 @@ namespace FightTest.States
             filter.SetLayerMask(_hitLayer);
             filter.useTriggers = true;
 
+            if (!_colliders)
+            {
+                return;
+            }
+            
             foreach (var hitbox in _colliders.Hitboxes)
             {
                 var count = hitbox.OverlapCollider(filter, _overlapBuffer);

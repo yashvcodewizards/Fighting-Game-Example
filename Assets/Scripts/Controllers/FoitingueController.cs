@@ -6,7 +6,7 @@ using UnityEngine;
 
 namespace FightTest.Controllers
 {
-    public class FoitingueController : MonoBehaviour
+    public class DefaultFighterController : MonoBehaviour
     {
         [SerializeField] private FighterBehaviourDefinition _fighterDefinition;
 
@@ -49,7 +49,7 @@ namespace FightTest.Controllers
             _fighterDefinition.Initialize(_services);
             
             var package = _fighterDefinition.Build(_runtime);
-            _root.Init(package);
+            _root.Init(package, _runtime);
         }
 
         private void FixedUpdate()

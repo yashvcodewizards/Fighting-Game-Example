@@ -1,4 +1,5 @@
 using System;
+using FighterBehaviour;
 using FightTest.StateMachine;
 using FightTest.Systems;
 
@@ -23,12 +24,12 @@ namespace FightTest.States
             _getSpeed = getSpeed;
         }
 
-        public void Enter()
+        public void Enter(FighterRuntime runtime)
         {
-            _colliders.EnableSet();
+            _colliders?.EnableSet();
         }
 
-        public void Tick()
+        public void Tick(FighterRuntime runtime)
         {
             MoveX = _getMoveX();
             Speed = _getSpeed();
@@ -36,10 +37,10 @@ namespace FightTest.States
             _mover.Move(MoveX, Speed);
         }
 
-        public void Exit()
+        public void Exit(FighterRuntime runtime)
         {
             _mover.Stop();
-            _colliders.DisableSet();
+            _colliders?.DisableSet();
         }
     }
 }

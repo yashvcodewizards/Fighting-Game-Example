@@ -1,3 +1,4 @@
+using FighterBehaviour;
 using FightTest.Data;
 using FightTest.StateMachine;
 using FightTest.Systems;
@@ -36,7 +37,7 @@ namespace FightTest.States
         private float RecoveryDuration => _data.RecoveryFrames / 60f;
         private float TotalDuration => StartupDuration + ActiveDuration + RecoveryDuration;
 
-        public void Enter()
+        public void Enter(FighterRuntime runtime)
         {
             IsFinished = false;
             _hasHitThisSwing = false;
@@ -45,7 +46,7 @@ namespace FightTest.States
             _colliders.EnableSet();
         }
 
-        public void Tick()
+        public void Tick(FighterRuntime runtime)
         {
             _timer += Time.deltaTime;
 
@@ -72,7 +73,7 @@ namespace FightTest.States
             }
         }
 
-        public void Exit()
+        public void Exit(FighterRuntime runtime)
         {
             _colliders.DisableSet();
             IsFinished = false;

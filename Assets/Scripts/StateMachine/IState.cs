@@ -1,9 +1,11 @@
+using FighterBehaviour;
+
 namespace FightTest.StateMachine
 {
     public interface IState
     {
-        void Enter();
-        void Tick();
-        void Exit();
+        void Enter(FighterRuntime runtime);
+        void Tick(FighterRuntime runtime);
+        void Exit(FighterRuntime runtime);
     }
 }
