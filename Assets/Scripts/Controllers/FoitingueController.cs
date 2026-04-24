@@ -32,7 +32,6 @@ namespace FightTest.Controllers
             _root = new StateMachine.StateMachine();
             
             _services = new FighterServices(
-                _inputProviderBehaviour,
                 _health,
                 _mover,
                 _facing,

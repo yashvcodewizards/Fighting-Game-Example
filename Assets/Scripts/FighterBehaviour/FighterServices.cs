@@ -8,9 +8,7 @@ namespace FighterBehaviour
 {
     public sealed class FighterServices
     {
-        public MonoBehaviour InputProviderBehaviour { get; }
         public CharacterHealth Health{ get; }
-
         public CharacterMover Mover { get; }
         public FacingSystem Facing { get; }
         public LayerMask HitLayer { get; }
@@ -21,7 +19,6 @@ namespace FighterBehaviour
         public HitStunTimer HitStunTimer { get; }
 
         public FighterServices(
-            MonoBehaviour inputProviderBehaviour,
             CharacterHealth health,
             CharacterMover mover,
             FacingSystem facing,
@@ -32,7 +29,6 @@ namespace FighterBehaviour
             GameObject self,
             HitStunTimer hitStunTimer)
         {
-            InputProviderBehaviour = inputProviderBehaviour;
             Health = health;
             Mover = mover;
             Facing = facing;
