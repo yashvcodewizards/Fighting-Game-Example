@@ -6,6 +6,11 @@ using UnityEngine;
 
 namespace FighterBehaviour
 {
+    /// <summary>
+    /// Service container for runtime systems used by fighter states.
+    /// Holds references to components that perform actions, such as movement,
+    /// facing, health, ground detection, and animation-related systems.
+    /// </summary>
     public sealed class FighterServices
     {
         public CharacterHealth Health{ get; }
@@ -17,6 +22,9 @@ namespace FighterBehaviour
         public StateMachine Root { get; }
         public GameObject Self { get; }
         public HitStunTimer HitStunTimer { get; }
+        
+        // TODO public HixboxManager
+        // TODO public FighterPresentation
 
         public FighterServices(
             CharacterHealth health,

@@ -3,6 +3,11 @@ using FightTest.States.FoitingueStates;
 
 namespace FighterBehaviour
 {
+    /// <summary>
+    /// Read-only helper layer for common fighter checks.
+    /// Provides derived queries such as grounded state, movement direction,
+    /// and transition conditions without putting that logic in the controller.
+    /// </summary>
     public class FighterQueries
     {
         private readonly FighterServices _services;

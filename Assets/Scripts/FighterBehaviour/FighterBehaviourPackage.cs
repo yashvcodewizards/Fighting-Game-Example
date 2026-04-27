@@ -3,6 +3,10 @@ using FightTest.StateMachine;
 
 namespace FighterBehaviour
 {
+    /// <summary>
+    /// Built result of a fighter behaviour definition.
+    /// Contains the initial state and transition graph needed by the state machine.
+    /// </summary>
     public class FighterBehaviourPackage
     {
         public IState InitialState { get; }
