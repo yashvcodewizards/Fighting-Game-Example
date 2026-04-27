@@ -11,7 +11,8 @@ namespace FighterBehaviour
     [CreateAssetMenu(menuName = "FightTest/FighterBehaviour/FoitingueBehaviour")]
     public class FoitingueBehaviourDefinition : FighterBehaviourDefinition
     {
-        #region colliders test
+        // Caution Gongee below
+        #region colliders test 
 
         [SerializeField] private ColliderSet _idleColliders;
 
@@ -67,7 +68,7 @@ namespace FighterBehaviour
             // Simple states
             var idle = new SimpleState();
             var crouch = new SimpleState();
-            var jumpRise = new JumpState(_jumpRiseColliders, JumpForce);
+            var jumpRise = new JumpState(JumpForce);
             var airborne = new SimpleState();
 
             // Movement states
@@ -342,7 +343,8 @@ namespace FighterBehaviour
                         () => queries.CanJumpFromGround(),
                         () =>
                         {
-                            jumpRise.Configure(context.Frame.MoveX * MoveSpeed);
+                            context.PendingJumpDirectionX = context.Frame.MoveX * MoveSpeed;
+                            context.SuppressNextJump = false;
                             return jumpRise;
                         })
                 );
@@ -358,7 +360,8 @@ namespace FighterBehaviour
 
             return new FighterBehaviourPackage(idle, transitions);
         }
-
+        
+        // TODO this is wrong
         public override void Initialize(FighterServices services)
         {
             services.Health.Init(MaxHealth);

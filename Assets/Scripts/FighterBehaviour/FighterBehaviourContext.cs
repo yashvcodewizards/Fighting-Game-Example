@@ -9,5 +9,9 @@ namespace FighterBehaviour
     public sealed class FighterBehaviourContext
     {
         public InputFrame Frame;
+        
+        //Jump
+        public float PendingJumpDirectionX;
+        public bool SuppressNextJump;
     }
 }
