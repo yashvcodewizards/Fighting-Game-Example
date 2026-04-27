@@ -72,18 +72,18 @@ namespace FighterBehaviour
 
             // Movement states
             var walk = new MovingState(
-                () => context.Frame.MoveX,
-                () => queries.IsWalkingBack()
+                r => r.Context.Frame.MoveX,
+                r => r.Queries.IsWalkingBack()
                     ? WalkBackSpeed
                     : MoveSpeed
             );
             var sprint = new MovingState(
-                () => context.Frame.MoveX,
-                () => SprintSpeed
+                r => r.Context.Frame.MoveX,
+                r => SprintSpeed
             );
             var crouchWalk = new MovingState(
-                () => queries.IsWalkingBack() ? 0f : context.Frame.MoveX,
-                () => MoveSpeed
+                r => r.Queries.IsWalkingBack() ? 0f : context.Frame.MoveX,
+                r => MoveSpeed
             );
 
             // Defensive / reaction states
