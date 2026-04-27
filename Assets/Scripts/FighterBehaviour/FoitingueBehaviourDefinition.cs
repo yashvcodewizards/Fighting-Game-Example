@@ -65,29 +65,23 @@ namespace FighterBehaviour
             var queries = runtime.Queries;
             
             // Simple states
-            var idle = new SimpleState(_idleColliders);
-            var crouch = new SimpleState(_crouchColliders);
+            var idle = new SimpleState();
+            var crouch = new SimpleState();
             var jumpRise = new JumpState(_jumpRiseColliders, JumpForce);
-            var airborne = new SimpleState(_airborneColliders);
+            var airborne = new SimpleState();
 
             // Movement states
             var walk = new MovingState(
-                services.Mover,
-                _walkColliders,
                 () => context.Frame.MoveX,
                 () => queries.IsWalkingBack()
                     ? WalkBackSpeed
                     : MoveSpeed
             );
             var sprint = new MovingState(
-                services.Mover,
-                _sprintColliders,
                 () => context.Frame.MoveX,
                 () => SprintSpeed
             );
             var crouchWalk = new MovingState(
-                services.Mover,
-                _crouchWalkColliders,
                 () => queries.IsWalkingBack() ? 0f : context.Frame.MoveX,
                 () => MoveSpeed
             );

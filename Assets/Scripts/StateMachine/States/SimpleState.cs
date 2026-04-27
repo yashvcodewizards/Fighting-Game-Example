@@ -4,18 +4,14 @@ using FightTest.Systems;
 
 namespace FightTest.States
 {
+    /// <summary>
+    /// Basic state with no special behaviour.
+    /// Used for states that only need to exist as part of the state graph.
+    /// </summary>
     public sealed class SimpleState : IState
     {
-        private readonly ColliderSet _colliders;
-
-        public SimpleState(ColliderSet colliders)
-        {
-            _colliders = colliders;
-        }
-
         public void Enter(FighterRuntime runtime)
         {
-            _colliders?.EnableSet();
         }
 
         public void Tick(FighterRuntime runtime)
@@ -24,7 +20,6 @@ namespace FightTest.States
 
         public void Exit(FighterRuntime runtime)
         {
-            _colliders?.DisableSet();
         }
     }
 }
