@@ -13,22 +13,12 @@ namespace FighterBehaviour
     {
         // Caution Gongee below
         #region colliders test 
-
-        [SerializeField] private ColliderSet _idleColliders;
-
-        [SerializeField] private ColliderSet _walkColliders;
-        [SerializeField] private ColliderSet _sprintColliders;
-        [SerializeField] private ColliderSet _dashColliders;
-        [SerializeField] private ColliderSet _crouchColliders;
-        [SerializeField] private ColliderSet _crouchWalkColliders;
         [SerializeField] private ColliderSet _blockColliders;
         [SerializeField] private ColliderSet _crouchBlockColliders;
         [SerializeField] private ColliderSet _hitStunColliders;
         [SerializeField] private ColliderSet _airHitStunColliders;
         [SerializeField] private ColliderSet _knockedDownColliders;
         [SerializeField] private ColliderSet _airKnockedDownColliders;
-        [SerializeField] private ColliderSet _jumpRiseColliders;
-        [SerializeField] private ColliderSet _airborneColliders;
         [SerializeField] private ColliderSet _lightColliders;
         [SerializeField] private ColliderSet _heavyColliders;
         [SerializeField] private ColliderSet _throwColliders;
@@ -88,11 +78,7 @@ namespace FighterBehaviour
             );
 
             // Defensive / reaction states
-            var dash = new DashState(
-                services.Mover,
-                BackDashSpeed,
-                BackDashDuration,
-                _dashColliders);
+            var dash = new DashState(BackDashSpeed, BackDashDuration);
 
             var block = new BlockStunState(_blockColliders);
             var crouchBlock = new BlockStunState(_crouchBlockColliders);
