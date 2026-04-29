@@ -1,4 +1,5 @@
-﻿using FightTest.Data;
+﻿using Data;
+using FightTest.Data;
 
 namespace FighterBehaviour
 {
@@ -13,5 +14,10 @@ namespace FighterBehaviour
         //Jump
         public float PendingJumpDirectionX;
         public bool SuppressNextJump;
+        
+        //Attack
+        public bool AttackHasHitThisSwing;
+        public float AttackTimer;
+        public bool AttackWasInActive;
     }
 }
