@@ -12,20 +12,12 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: a4365909e72a42b18256e2b6c7e4e395, type: 3}
   m_Name: FoitingueBehaviour
   m_EditorClassIdentifier: 
-  _idleColliders: {fileID: 0}
-  _walkColliders: {fileID: 0}
-  _sprintColliders: {fileID: 0}
-  _dashColliders: {fileID: 0}
-  _crouchColliders: {fileID: 0}
-  _crouchWalkColliders: {fileID: 0}
   _blockColliders: {fileID: 0}
   _crouchBlockColliders: {fileID: 0}
   _hitStunColliders: {fileID: 0}
   _airHitStunColliders: {fileID: 0}
   _knockedDownColliders: {fileID: 0}
   _airKnockedDownColliders: {fileID: 0}
-  _jumpRiseColliders: {fileID: 0}
-  _airborneColliders: {fileID: 0}
   _lightColliders: {fileID: 0}
   _heavyColliders: {fileID: 0}
   _throwColliders: {fileID: 0}
@@ -41,6 +33,7 @@ MonoBehaviour:
   BackDashDuration: 0.2
   JumpForce: 10
   MaxHealth: 100
+  IdleBoxProfile: {fileID: 11400000, guid: 4e3e40e530972fb469e1501399d092c6, type: 2}
   ThrowAttack: {fileID: 11400000, guid: c97b76bf14262954ab8f879621ba1593, type: 2}
   LightAttack: {fileID: 11400000, guid: 40d103f77a242c94cb5b7fe09a7d342e, type: 2}
   HeavyAttack: {fileID: 11400000, guid: c29bdf3a7a0ea4d4fbfe70cea1058289, type: 2}

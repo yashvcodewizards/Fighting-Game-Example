@@ -1,4 +1,5 @@
 ﻿using System.Collections.Generic;
+using Data;
 using FightTest.Data;
 using FightTest.StateMachine;
 using FightTest.States;
@@ -39,6 +40,8 @@ namespace FighterBehaviour
 
         [Header("Health")]
         public int MaxHealth = 100;
+
+        [Header("BoxData")] public BoxProfile IdleBoxProfile;
         
         [Header("Attack Data")]
         public AttackData ThrowAttack;
@@ -56,10 +59,10 @@ namespace FighterBehaviour
             var queries = runtime.Queries;
             
             // Simple states
-            var idle = new SimpleState();
-            var crouch = new SimpleState();
+            var idle = new SimpleState(IdleBoxProfile);
+            var crouch = new SimpleState(null);
             var jumpRise = new JumpState(JumpForce);
-            var airborne = new SimpleState();
+            var airborne = new SimpleState(null);
 
             // Movement states
             var walk = new MovingState(
@@ -100,59 +103,12 @@ namespace FighterBehaviour
                 services.HitLayer,
                 services.Self);
 
-            var lightAttack = new AttackState(
-                LightAttack,
-                _lightColliders,
-                services.HitLayer,
-                services.Facing,
-                services.Self,
-                "LightAttack",
-                services.Mover);
-
-            var heavyAttack = new AttackState(
-                HeavyAttack,
-                _heavyColliders,
-                services.HitLayer,
-                services.Facing,
-                services.Self,
-                "HeavyAttack",
-                services.Mover);
-
-            var crouchLightAttack = new AttackState(
-                CrouchLightAttack,
-                _crouchLightColliders,
-                services.HitLayer,
-                services.Facing,
-                services.Self,
-                "CrouchLight",
-                services.Mover);
-
-            var crouchHeavyAttack = new AttackState(
-                CrouchHeavyAttack,
-                _crouchHeavyColliders,
-                services.HitLayer,
-                services.Facing,
-                services.Self,
-                "CrouchHeavy",
-                services.Mover);
-
-            var airLightAttack = new AttackState(
-                AirLightAttack,
-                _airLightColliders,
-                services.HitLayer,
-                services.Facing,
-                services.Self,
-                "AirLight",
-                services.Mover);
-
-            var airHeavyAttack = new AttackState(
-                AirHeavyAttack,
-                _airHeavyColliders,
-                services.HitLayer,
-                services.Facing,
-                services.Self,
-                "AirHeavy",
-                services.Mover);
+            var lightAttack = new AttackState(LightAttack, "LightAttack");
+            var heavyAttack = new AttackState(HeavyAttack, "HeavyAttack");
+            var crouchLightAttack = new AttackState(CrouchLightAttack, "CrouchLight");
+            var crouchHeavyAttack = new AttackState(CrouchHeavyAttack, "CrouchHeavy");
+            var airLightAttack = new AttackState(AirLightAttack, "AirLight");
+            var airHeavyAttack = new AttackState(AirHeavyAttack, "AirHeavy");
 
             // Root states
             /*var ground = new GroundState(idle);

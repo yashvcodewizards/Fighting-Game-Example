@@ -1,6 +1,6 @@
+using Data;
 using FighterBehaviour;
 using FightTest.StateMachine;
-using FightTest.Systems;
 
 namespace FightTest.States
 {
@@ -10,8 +10,16 @@ namespace FightTest.States
     /// </summary>
     public sealed class SimpleState : IState
     {
+        private BoxProfile _boxProfile;
+        
+        public SimpleState(BoxProfile boxProfile)
+        {
+            _boxProfile = boxProfile;
+        }
+        
         public void Enter(FighterRuntime runtime)
         {
+            runtime.Services.HitBoxManager.ApplyProfile(_boxProfile);
         }
 
         public void Tick(FighterRuntime runtime)
