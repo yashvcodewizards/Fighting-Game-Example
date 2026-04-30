@@ -22,8 +22,8 @@ namespace FighterBehaviour
         public StateMachine Root { get; }
         public GameObject Self { get; }
         public HitStunTimer HitStunTimer { get; }
+        public HitBoxManager HitBoxManager { get; }
         
-        // TODO public HixboxManager
         // TODO public FighterPresentation
 
         public FighterServices(
@@ -35,7 +35,8 @@ namespace FighterBehaviour
             Rigidbody2D rb,
             StateMachine root,
             GameObject self,
-            HitStunTimer hitStunTimer)
+            HitStunTimer hitStunTimer,
+            HitBoxManager hitBoxManager)
         {
             Health = health;
             Mover = mover;
@@ -46,6 +47,7 @@ namespace FighterBehaviour
             Root = root;
             Self = self;
             HitStunTimer = hitStunTimer;
+            HitBoxManager = hitBoxManager;
         }
     }
 }
