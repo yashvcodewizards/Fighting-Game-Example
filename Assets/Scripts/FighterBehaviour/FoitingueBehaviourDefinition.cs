@@ -62,7 +62,7 @@ namespace FighterBehaviour
             var idle = new SimpleState(IdleBoxProfile);
             var crouch = new SimpleState(null);
             var jumpRise = new JumpState(JumpForce);
-            var airborne = new SimpleState(null);
+            var airborne = new SimpleState(IdleBoxProfile);
 
             // Movement states
             var walk = new MovingState(
@@ -109,10 +109,6 @@ namespace FighterBehaviour
             var crouchHeavyAttack = new AttackState(CrouchHeavyAttack, "CrouchHeavy");
             var airLightAttack = new AttackState(AirLightAttack, "AirLight");
             var airHeavyAttack = new AttackState(AirHeavyAttack, "AirHeavy");
-
-            // Root states
-            /*var ground = new GroundState(idle);
-            var airborn = new AirbornState(jumpRise, services.Mover, JumpForce);*/
 
             var transitions = new Dictionary<IState, List<ITransition>>();
 
