@@ -131,7 +131,7 @@ namespace FighterBehaviour
 
         public bool IsPendingHit()
         {
-            return _context.PendingHit != null;
+            return _context.PendingHit.HasValue;
         }
     }
 }

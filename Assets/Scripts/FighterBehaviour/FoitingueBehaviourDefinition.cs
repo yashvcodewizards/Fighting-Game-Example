@@ -41,7 +41,9 @@ namespace FighterBehaviour
         [Header("Health")]
         public int MaxHealth = 100;
 
-        [Header("BoxData")] public BoxProfile IdleBoxProfile;
+        [Header("BoxData")] 
+        public BoxProfile IdleBoxProfile;
+        public BoxProfile HitStunBoxProfile;
         
         [Header("Attack Data")]
         public AttackData ThrowAttack;
@@ -85,8 +87,8 @@ namespace FighterBehaviour
 
             var block = new BlockStunState(_blockColliders);
             var crouchBlock = new BlockStunState(_crouchBlockColliders);
-            var hitStun = new HitStunState(_hitStunColliders, services.HitStunTimer);
-            var airHitStun = new HitStunState(_airHitStunColliders, services.HitStunTimer);
+            var hitStun = new HitStunState(HitStunBoxProfile, services.HitStunTimer);
+            var airHitStun = new HitStunState(HitStunBoxProfile, services.HitStunTimer);
             var knockedDown = new KnockedDownState(_knockedDownColliders, 75);
             var airKnockedDown = new KnockedDownState(_airKnockedDownColliders, 0);
 
