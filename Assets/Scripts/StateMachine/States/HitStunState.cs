@@ -35,7 +35,7 @@ namespace FightTest.States
 
             runtime.Context.PendingHit = null;
 
-            /*runtime.Services.Health.TakeDamage(data.Damage);*/ // TODO Add damaging
+            runtime.Services.Health.TakeDamage(data.Damage);
 
             runtime.Services.Mover.AddForce(
                 new Vector2(
