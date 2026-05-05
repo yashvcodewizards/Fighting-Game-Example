@@ -1,8 +1,9 @@
 using FightTest.Data;
+using UnityEngine;
 
 namespace FightTest.Input
 {
-    public class AiInputProvider : IInputProvider
+    public class AiInputProvider : MonoBehaviour, IInputProvider
     {
         public InputFrame GetFrame()
         {
