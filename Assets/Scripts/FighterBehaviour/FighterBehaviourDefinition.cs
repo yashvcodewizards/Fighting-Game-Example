@@ -11,6 +11,6 @@ namespace FighterBehaviour
     {
         public abstract FighterBehaviourPackage Build(FighterRuntime runtime);
 
-        public abstract void Initialize(FighterServices services);
+        public abstract void Initialize(FighterRuntime runtime);
     }
 }

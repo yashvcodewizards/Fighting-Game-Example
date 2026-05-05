@@ -140,6 +140,7 @@ namespace FighterBehaviour
             // Ground transitions
             RegisterTransitions(
                 idle,
+                new Transition(() => queries.IsPendingHit(), () => hitStun),
                 new Transition(() => queries.IsTryingToBackDash() && queries.IsWalkingBack(), () => dash),
                 new Transition(() => queries.CanWalkFromIdle(), () => walk),
                 new Transition(() => context.Frame.Duck, () => crouch),
@@ -300,9 +301,10 @@ namespace FighterBehaviour
         }
         
         // TODO this is wrong
-        public override void Initialize(FighterServices services)
+        public override void Initialize(FighterRuntime runtime)
         {
-            services.Health.Init(MaxHealth);
+            runtime.Services.Health.Init(MaxHealth);
+            runtime.Services.HitHandler.Initialize(runtime);
         }
     }
 }

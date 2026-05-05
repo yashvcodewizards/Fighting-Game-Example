@@ -102,7 +102,7 @@ namespace FightTest.States
                     }
 
                     _hasHitThisSwing = true;
-                    hittable.ReceiveThrow(_data);
+                    //hittable.ReceiveThrow(_data); TODO 
                     return;
                 }
             }

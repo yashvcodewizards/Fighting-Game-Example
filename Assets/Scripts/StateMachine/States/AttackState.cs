@@ -13,8 +13,6 @@ namespace FightTest.States
         private int _currentFrame;
         private bool _hasLunged;
 
-        //private bool _hasHitThisSwing;
-
         public AttackState(
             AttackData data,
             string label)
@@ -25,18 +23,18 @@ namespace FightTest.States
 
         public bool IsFinished { get; private set; }
         private int TotalFrames => _data.StartupFrames + _data.ActiveFrames + _data.RecoveryFrames;
-
-
+        
         public void Enter(FighterRuntime runtime)
         {
             _currentFrame = 0;
             _hasLunged = false;
             IsFinished = false;
             
+            runtime.Services.HitDetector.BeginAttack();
+            
             
             // Later:
             // runtime.Services.Animation.Play(_label);
-            //_hasHitThisSwing = false; -> move to HixBox Hithanddler
         }
 
         public void Tick(FighterRuntime runtime)
@@ -44,6 +42,7 @@ namespace FightTest.States
             TryLunge(runtime);
             
             runtime.Services.HitBoxManager.ApplyTimelineFrame(_data.boxTimeline, _currentFrame);
+            runtime.Services.HitDetector.TryHit(runtime, _data);
             
             _currentFrame++;
             
