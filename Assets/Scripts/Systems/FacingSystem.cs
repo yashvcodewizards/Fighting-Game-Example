@@ -4,7 +4,7 @@ namespace FightTest.Systems
 {
     public class FacingSystem : MonoBehaviour
     {
-        public float Sign { get; private set; } = -1f;
+        public float Sign { get; private set; } = 1f;
 
         private void Awake()
         {
