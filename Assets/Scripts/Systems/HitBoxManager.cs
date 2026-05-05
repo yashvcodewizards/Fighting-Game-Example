@@ -3,18 +3,36 @@ using UnityEngine;
 
 namespace FightTest.Systems
 {
-    public class HitBoxManager: MonoBehaviour
+    public class HitBoxManager : MonoBehaviour
     {
-        [Header("Box Slots")]
-        [SerializeField] private BoxCollider2D[] hitboxSlots;
+        [Header("Box Slots")] [SerializeField] private BoxCollider2D[] hitboxSlots;
         [SerializeField] private BoxCollider2D[] hurtboxSlots;
         [SerializeField] private CapsuleCollider2D pushboxSlot;
+
+        public void ApplyTimelineFrame(BoxTimeline timeline, int frame)
+        {
+            if (timeline == null)
+            {
+                ClearHitboxes();
+                return;
+            }
+
+            var boxFrame = timeline.GetFrame(frame);
+
+            if (boxFrame == null)
+            {
+                ClearHitboxes();
+                return;
+            }
+
+            ApplyFrame(boxFrame);
+        }
 
         public void ApplyProfile(BoxProfile profile)
         {
             if (profile == null || profile.Frame == null)
             {
-                Debug.LogError("HitBoxManager.ApplyProfile:: Could not ApplyProfile, profile is null");
+                Debug.LogError("HitBoxManager.ApplyProfile:: Profile or Frame is null", this);
                 ClearAll();
                 return;
             }
@@ -73,7 +91,9 @@ namespace FightTest.Systems
         private void ApplyBoxesToSlots(Collider2D[] slots, BoxData[] boxes)
         {
             if (slots == null)
+            {
                 return;
+            }
 
             for (int i = 0; i < slots.Length; i++)
             {
@@ -81,7 +101,7 @@ namespace FightTest.Systems
                 {
                     ApplyBox(slots[i], boxes[i]);
                 }
-                else
+                else if (slots[i] != null)
                 {
                     slots[i].enabled = false;
                 }
