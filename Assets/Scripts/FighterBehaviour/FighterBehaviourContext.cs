@@ -16,6 +16,7 @@ namespace FighterBehaviour
         public bool SuppressNextJump;
         
         //Attack
+        public HitInfo? PendingHit;
         public bool AttackHasHitThisSwing;
         public float AttackTimer;
         public bool AttackWasInActive;

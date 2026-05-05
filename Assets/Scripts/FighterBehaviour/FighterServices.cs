@@ -1,5 +1,4 @@
-﻿using FightTest.Data;
-using FightTest.StateMachine;
+﻿using FightTest.StateMachine;
 using FightTest.States;
 using FightTest.Systems;
 using UnityEngine;
@@ -23,6 +22,8 @@ namespace FighterBehaviour
         public GameObject Self { get; }
         public HitStunTimer HitStunTimer { get; }
         public HitBoxManager HitBoxManager { get; }
+        public HitDetector HitDetector { get; }
+        public HitHandler HitHandler { get; }
         
         // TODO public FighterPresentation
 
@@ -36,7 +37,9 @@ namespace FighterBehaviour
             StateMachine root,
             GameObject self,
             HitStunTimer hitStunTimer,
-            HitBoxManager hitBoxManager)
+            HitBoxManager hitBoxManager,
+            HitDetector hitDetector,
+            HitHandler hitHandler)
         {
             Health = health;
             Mover = mover;
@@ -48,6 +51,8 @@ namespace FighterBehaviour
             Self = self;
             HitStunTimer = hitStunTimer;
             HitBoxManager = hitBoxManager;
+            HitDetector = hitDetector;
+            HitHandler = hitHandler;
         }
     }
 }

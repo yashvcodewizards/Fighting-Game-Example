@@ -18,6 +18,7 @@ namespace FightTest.Controllers
         [SerializeField] private LayerMask _hitLayer;
         [SerializeField] private GroundDetector _groundDetector;
         [SerializeField] private Rigidbody2D _rb;
+        [SerializeField] private HitDetector _hitDetector;
         [SerializeField] private HitHandler _hitHandler;
         [SerializeField] private HitBoxManager _hitBoxManager;
         
@@ -43,13 +44,15 @@ namespace FightTest.Controllers
                 _root,
                 gameObject,
                 _hitStunTimer,
-                _hitBoxManager
+                _hitBoxManager,
+                _hitDetector,
+                _hitHandler
             );
 
             _context = new FighterBehaviourContext();
             _runtime = new FighterRuntime(_services, _context);
 
-            _fighterDefinition.Initialize(_services);
+            _fighterDefinition.Initialize(_runtime);
             
             var package = _fighterDefinition.Build(_runtime);
             _root.Init(package, _runtime);

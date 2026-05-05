@@ -128,5 +128,10 @@ namespace FighterBehaviour
                    && !IsGroundSubstateAttack()
                    && !IsHitStunned();
         }
+
+        public bool IsPendingHit()
+        {
+            return _context.PendingHit != null;
+        }
     }
 }
