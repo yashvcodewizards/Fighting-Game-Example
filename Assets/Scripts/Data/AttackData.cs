@@ -3,39 +3,26 @@ using UnityEngine;
 
 namespace FightTest.Data
 {
-    public enum AttackHeight
-    {
-        Mid,
-        Low,
-        Air
-    }
-
     [CreateAssetMenu(menuName = "FightTest/AttackData")]
     public class AttackData : ScriptableObject
     {
-        [Header("Attack Properties")]
-        public AttackHeight Height = AttackHeight.Mid;
+        [Header("Hit Timing & Boxes")]
+        public BoxTimeline BoxTimeline;
+        
+        // TODO Add any unique responses eg. Different enemy stun frames if they are blocked etc
 
-        [Header("Frame Data")]
-        public int StartupFrames = 4;
-
-        public int ActiveFrames = 3;
-        public int RecoveryFrames = 8;
-        public int EnemyHitStopFrames = 4;
-        public int EnemyBlockStunFrames = 8;
-        public Vector2 BlockKnockback;
-
-        public BoxTimeline boxTimeline;
-
-        [Header("Lunge")]
+        [Header("Movement (Self)")]
         public Vector2 LungeForce;
         public int LungeFrame;
 
-        [Header("Knockback")]
-        public Vector2 Knockback;
-        public bool KnocksDown;
-
         [Header("Damage")]
         public int Damage = 5;
+        
+        [Header("Hit Reaction (Enemy)")]
+        public int EnemyHitStunFrames = 4;
+        
+        [Header("KnockBack (Enemy)")]
+        public Vector2 Knockback;
+        public bool KnocksDown;
     }
 }

@@ -22,7 +22,9 @@ namespace FightTest.States
         }
 
         public bool IsFinished { get; private set; }
-        private int TotalFrames => _data.StartupFrames + _data.ActiveFrames + _data.RecoveryFrames;
+        private int TotalFrames => _data.BoxTimeline != null
+            ? _data.BoxTimeline.TotalFrames
+            : 0;
         
         public void Enter(FighterRuntime runtime)
         {
@@ -41,7 +43,7 @@ namespace FightTest.States
         {
             TryLunge(runtime);
             
-            runtime.Services.HitBoxManager.ApplyTimelineFrame(_data.boxTimeline, _currentFrame);
+            runtime.Services.HitBoxManager.ApplyTimelineFrame(_data.BoxTimeline, _currentFrame);
             runtime.Services.HitDetector.TryHit(runtime, _data);
             
             _currentFrame++;

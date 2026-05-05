@@ -12,16 +12,10 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: 81b62f9833be50c47863ca4dace74803, type: 3}
   m_Name: Light Attack
   m_EditorClassIdentifier: 
-  Height: 0
-  StartupFrames: 6
-  ActiveFrames: 2
-  RecoveryFrames: 13
-  EnemyHitStopFrames: 22
-  EnemyBlockStunFrames: 8
-  BlockKnockback: {x: 1, y: 0}
-  boxTimeline: {fileID: 11400000, guid: 9560d4f70f03ef94da075d753e844ba7, type: 2}
+  BoxTimeline: {fileID: 11400000, guid: 9560d4f70f03ef94da075d753e844ba7, type: 2}
   LungeForce: {x: 2, y: 0}
   LungeFrame: 0
+  EnemyHitStunFrames: 4
   Knockback: {x: 3, y: 0}
-  KnocksDown: 0
+  KnocksDown: 1
   Damage: 7

@@ -45,7 +45,7 @@ namespace FightTest.States
                 )
             );
 
-            _timer.Configure(data.EnemyHitStopFrames);
+            _timer.Configure(data.EnemyHitStunFrames);
         }
 
         public void Tick(FighterRuntime runtime)
