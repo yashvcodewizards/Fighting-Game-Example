@@ -85,39 +85,5 @@ namespace FightTest.States
 
             _hasLunged = true;
         }
-
-        /*private void TryHit()
-        {
-            var filter = new ContactFilter2D();
-            filter.SetLayerMask(_hitLayer);
-            filter.useTriggers = true;
-
-            if (!_colliders)
-            {
-                return;
-            }
-
-            foreach (var hitbox in _colliders.Hitboxes)
-            {
-                var count = hitbox.OverlapCollider(filter, _overlapBuffer);
-                for (var i = 0; i < count; i++)
-                {
-                    if (_overlapBuffer[i].transform.IsChildOf(_self.transform))
-                    {
-                        continue;
-                    }
-
-                    var hittable = _overlapBuffer[i].GetComponentInParent<IHittable>();
-                    if (hittable == null)
-                    {
-                        continue;
-                    }
-
-                    _hasHitThisSwing = true;
-                    hittable.ReceiveHit(_data);
-                    return;
-                }
-            }
-        }*/
     }
 }

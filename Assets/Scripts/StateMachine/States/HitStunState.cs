@@ -26,6 +26,7 @@ namespace FightTest.States
 
             if (!pendingHit.HasValue)
             {
+                runtime.Context.PendingHit = null;
                 _timer.Configure(0);
                 return;
             }
