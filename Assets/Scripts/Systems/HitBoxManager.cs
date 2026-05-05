@@ -1,4 +1,5 @@
-﻿using Data;
+﻿using System.Collections.Generic;
+using Data;
 using UnityEngine;
 
 namespace FightTest.Systems
@@ -8,6 +9,8 @@ namespace FightTest.Systems
         [Header("Box Slots")] [SerializeField] private BoxCollider2D[] hitboxSlots;
         [SerializeField] private BoxCollider2D[] hurtboxSlots;
         [SerializeField] private CapsuleCollider2D pushboxSlot;
+        
+        public IReadOnlyList<BoxCollider2D> ActiveHitBoxes => hitboxSlots;
 
         public void ApplyTimelineFrame(BoxTimeline timeline, int frame)
         {
@@ -85,7 +88,9 @@ namespace FightTest.Systems
             ClearSlots(hurtboxSlots);
 
             if (pushboxSlot != null)
+            {
                 pushboxSlot.enabled = false;
+            }
         }
 
         private void ApplyBoxesToSlots(Collider2D[] slots, BoxData[] boxes)
@@ -141,12 +146,16 @@ namespace FightTest.Systems
         private void ClearSlots(Collider2D[] slots)
         {
             if (slots == null)
+            {
                 return;
+            }
 
             foreach (var slot in slots)
             {
                 if (slot != null)
+                {
                     slot.enabled = false;
+                }
             }
         }
     }

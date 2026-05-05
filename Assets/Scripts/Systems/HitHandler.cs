@@ -1,21 +1,29 @@
-using FightTest.Controllers;
-using FightTest.Data;
+using Data;
+using FighterBehaviour;
 using UnityEngine;
 
 namespace FightTest.Systems
 {
     public class HitHandler : MonoBehaviour, IHittable
     {
-        private FighterController _controller;
+        private FighterRuntime _runtime;
 
-        private void Awake()
+        public void Initialize(FighterRuntime runtime)
         {
-            _controller = GetComponent<FighterController>();
+            _runtime = runtime;
         }
 
-        public void ReceiveHit(AttackData data)
+        public void ReceiveHit(HitInfo hitInfo)
         {
-            if (_controller.QueryIsInvulnerable)
+            if (_runtime == null)
+            {
+                Debug.LogWarning($"{name} HitHandler has no runtime.");
+                return;
+            }
+
+            _runtime.Context.PendingHit = hitInfo;
+            
+            /*if (_controller.QueryIsInvulnerable)
             {
                 return;
             }
@@ -53,12 +61,13 @@ namespace FightTest.Systems
             {
                 _controller.OnGroundHit();
                 TakeDamage(data);
-            }
+            }*/
         }
 
-        public void ReceiveThrow(AttackData data)
+
+        /*public void ReceiveThrow(AttackData data)
         {
-            if (_controller.QueryIsInvulnerable)
+            /*if (_controller.QueryIsInvulnerable)
             {
                 return;
             }
@@ -72,19 +81,19 @@ namespace FightTest.Systems
             if (!_controller.QueryIsAirborne)
             {
                 _controller.OnGroundKnockdown();
-            }
+            }#1#
         }
 
         private void TakeDamage(AttackData data)
         {
-            _controller.Mover.AddForce(new Vector2(-_controller.Facing.Sign * data.Knockback.x, data.Knockback.y));
+            /*_controller.Mover.AddForce(new Vector2(-_controller.Facing.Sign * data.Knockback.x, data.Knockback.y));
             _controller.Health.TakeDamage(data.Damage);
-            _controller.HitStunTimer.Configure(data.EnemyHitStopFrames);
+            _controller.HitStunTimer.Configure(data.EnemyHitStopFrames);#1#
         }
 
         private bool CanBlock(AttackData data)
         {
-            if (_controller.QueryIsInWalkState)
+            /*if (_controller.QueryIsInWalkState)
             {
                 return data.Height == AttackHeight.Mid || data.Height == AttackHeight.Air;
             }
@@ -93,8 +102,8 @@ namespace FightTest.Systems
             {
                 return data.Height == AttackHeight.Mid || data.Height == AttackHeight.Low;
             }
-
+#1#
             return false;
-        }
+        }*/
     }
 }
