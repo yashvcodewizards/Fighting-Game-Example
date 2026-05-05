@@ -1,3 +1,4 @@
+using FightTest.Systems;
 using UnityEngine;
 
 namespace FightTest.Data
@@ -23,6 +24,8 @@ namespace FightTest.Data
         public int EnemyHitStopFrames = 4;
         public int EnemyBlockStunFrames = 8;
         public Vector2 BlockKnockback;
+
+        public BoxTimeline boxTimeline;
 
         [Header("Lunge")]
         public Vector2 LungeForce;
