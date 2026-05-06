@@ -6,21 +6,19 @@ namespace FightTest.States.FoitingueStates
     public class JumpState: IState
     {
         private readonly float _jumpForce;
+        private readonly float _horizontalSpeed;
         
-        public JumpState(float jumpForce)
+        public JumpState(float jumpForce, float horizontalSpeed)
         {
             _jumpForce = jumpForce;
+            _horizontalSpeed = horizontalSpeed;
         }
 
         public void Enter(FighterRuntime runtime)
         {
-            if (runtime.Context.SuppressNextJump)
-            {
-                runtime.Context.SuppressNextJump = false;
-            }
+            var directionX = runtime.Context.Frame.MoveX * _horizontalSpeed;
 
-            runtime.Services.Mover.Jump(_jumpForce, runtime.Context.PendingJumpDirectionX);
-            
+            runtime.Services.Mover.Jump(_jumpForce, directionX);
         }
 
         public void Tick(FighterRuntime runtime)
@@ -30,11 +28,5 @@ namespace FightTest.States.FoitingueStates
         public void Exit(FighterRuntime runtime)
         {
         }
-
-        // TODO replace this usage later with 'context.SuppressNextJump = true;'
-        /*public void ConfigureAsLaunched()
-        {
-            _suppressJump = true;
-        }*/
     }
 }
