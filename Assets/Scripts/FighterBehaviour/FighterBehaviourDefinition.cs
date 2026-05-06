@@ -3,14 +3,30 @@
 namespace FighterBehaviour
 {
     /// <summary>
-    /// Base asset for defining a fighter's behaviour graph.
-    /// Implementations create the fighter's states, transitions, and initial state,
-    /// then return them as a behaviour package.
     /// </summary>
-    public abstract class FighterBehaviourDefinition: ScriptableObject
+    [CreateAssetMenu(menuName = "FightTest/FighterBehaviour/Definition")]
+    public sealed class FighterBehaviourDefinition : ScriptableObject
     {
-        public abstract FighterBehaviourPackage Build(FighterRuntime runtime);
+        [SerializeField] private FighterBehaviourData _behaviourData;
+        [SerializeField] private FighterBehaviourTransitionBuilder _transitionBuilder;
 
-        public abstract void Initialize(FighterRuntime runtime);
+        public FighterBehaviourPackage Build(FighterRuntime runtime)
+        {
+            if (!_transitionBuilder.CanBuildFrom(_behaviourData))
+            {
+                Debug.LogError($"{_transitionBuilder.name} cannot build transitions for {_behaviourData.name}");
+                return null;
+            }
+
+            var states = _behaviourData.BuildStates(runtime);
+            var transitions = _transitionBuilder.BuildTransitions(runtime, states);
+
+            return new FighterBehaviourPackage(states.InitialState, transitions);
+        }
+
+        public void Initialize(FighterRuntime runtime)
+        {
+            _behaviourData.Initialize(runtime);
+        }
     }
 }
