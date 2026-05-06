@@ -1,0 +1,16 @@
+%YAML 1.1
+%TAG !u! tag:unity3d.com,2011:
+--- !u!114 &11400000
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 0}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: c6d12169e2394840a239b7c911be32c1, type: 3}
+  m_Name: BasicFighterBehaviourDefinition
+  m_EditorClassIdentifier: 
+  _behaviourData: {fileID: 11400000, guid: 4da6d06227df2d746b07db61385a3559, type: 2}
+  _transitionBuilder: {fileID: 11400000, guid: 78380c82d1c219b46a2d85049d131e7c, type: 2}
