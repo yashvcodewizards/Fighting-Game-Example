@@ -32,10 +32,10 @@ namespace FightTest.States
 
         public bool IsFinished { get; private set; }
 
-        private float StartupDuration => _data.StartupFrames / 60f;
+        /*private float StartupDuration => _data.StartupFrames / 60f;
         private float ActiveDuration => _data.ActiveFrames / 60f;
         private float RecoveryDuration => _data.RecoveryFrames / 60f;
-        private float TotalDuration => StartupDuration + ActiveDuration + RecoveryDuration;
+        private float TotalDuration => StartupDuration + ActiveDuration + RecoveryDuration;*/
 
         public void Enter(FighterRuntime runtime)
         {
@@ -48,7 +48,7 @@ namespace FightTest.States
 
         public void Tick(FighterRuntime runtime)
         {
-            _timer += Time.deltaTime;
+            /*_timer += Time.deltaTime;
 
             var inActive = _timer >= StartupDuration && _timer < StartupDuration + ActiveDuration;
 
@@ -70,7 +70,7 @@ namespace FightTest.States
             if (_timer >= TotalDuration)
             {
                 IsFinished = true;
-            }
+            }*/
         }
 
         public void Exit(FighterRuntime runtime)

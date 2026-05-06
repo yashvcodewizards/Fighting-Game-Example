@@ -16,17 +16,17 @@ namespace FighterBehaviour
         #region colliders test 
         [SerializeField] private ColliderSet _blockColliders;
         [SerializeField] private ColliderSet _crouchBlockColliders;
-        [SerializeField] private ColliderSet _hitStunColliders;
-        [SerializeField] private ColliderSet _airHitStunColliders;
+        /*[SerializeField] private ColliderSet _hitStunColliders;
+        [SerializeField] private ColliderSet _airHitStunColliders;*/
         [SerializeField] private ColliderSet _knockedDownColliders;
         [SerializeField] private ColliderSet _airKnockedDownColliders;
-        [SerializeField] private ColliderSet _lightColliders;
-        [SerializeField] private ColliderSet _heavyColliders;
+        /*[SerializeField] private ColliderSet _lightColliders;
+        [SerializeField] private ColliderSet _heavyColliders;*/
         [SerializeField] private ColliderSet _throwColliders;
-        [SerializeField] private ColliderSet _crouchLightColliders;
+        /*[SerializeField] private ColliderSet _crouchLightColliders;
         [SerializeField] private ColliderSet _crouchHeavyColliders;
         [SerializeField] private ColliderSet _airLightColliders;
-        [SerializeField] private ColliderSet _airHeavyColliders;
+        [SerializeField] private ColliderSet _airHeavyColliders;*/
         [SerializeField] private ColliderSet _airThrowColliders;
         #endregion
         
