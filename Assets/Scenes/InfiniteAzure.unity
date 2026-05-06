@@ -5218,7 +5218,7 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: 9dee59f4b4d14fc2851a940a8b77e6e0, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
-  _fighterDefinition: {fileID: 11400000, guid: 4f63f916ad165ac4a96d8657a33f65da, type: 2}
+  _fighterDefinition: {fileID: 11400000, guid: 52aca5a27a7a4fb4f82b5a394f54a22e, type: 2}
   _inputProviderBehaviour: {fileID: 1446321905}
   _health: {fileID: 1446321910}
   _mover: {fileID: 1446321911}
@@ -9942,7 +9942,7 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: 9dee59f4b4d14fc2851a940a8b77e6e0, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
-  _fighterDefinition: {fileID: 11400000, guid: 4f63f916ad165ac4a96d8657a33f65da, type: 2}
+  _fighterDefinition: {fileID: 11400000, guid: 52aca5a27a7a4fb4f82b5a394f54a22e, type: 2}
   _inputProviderBehaviour: {fileID: 3722673737033375509}
   _health: {fileID: 3722673737033375496}
   _mover: {fileID: 3722673737033375498}
