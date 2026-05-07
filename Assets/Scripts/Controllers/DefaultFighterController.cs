@@ -47,7 +47,7 @@ namespace FightTest.Controllers
         
         private void FixedUpdate()
         {
-            if (_isInitialized)
+            if (!_isInitialized)
             {
                 return;
             }
