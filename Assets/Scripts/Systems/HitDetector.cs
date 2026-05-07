@@ -51,7 +51,6 @@ namespace FightTest.Systems
                     }
                     
                     var hitInfo = new HitInfo(
-                        attacker,
                         data,
                         new Vector2(attacker.Services.Facing.Sign, 0f)
                     );
