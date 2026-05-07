@@ -10,7 +10,7 @@ namespace FighterBehaviour
     public class FighterBehaviourPackage
     {
         public IState InitialState { get; }
-        public Dictionary<IState, List<ITransition>> Transitions;
+        public Dictionary<IState, List<ITransition>> Transitions { get; }
 
         public FighterBehaviourPackage(
             IState initialState,

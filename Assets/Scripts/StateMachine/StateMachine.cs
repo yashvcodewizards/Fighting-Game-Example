@@ -55,31 +55,27 @@ namespace FightTest.StateMachine
             }
 
             Debug.Log($"State change: {CurrentState?.GetType().Name ?? "NULL"} -> {next.GetType().Name}");
-
             
-            Exit(CurrentState);
+            ExitCurrentState();
+            
             CurrentState = next;
             next.Enter(_runtime);
         }
 
-        private void Exit(IState state)
+        private void ExitCurrentState()
         {
-            if (state == null)
+            if (CurrentState == null)
             {
                 return;
             }
 
-            state.Exit(_runtime);
+            CurrentState.Exit(_runtime);
         }
-
-        public void RegisterTransitions(IState state, params ITransition[] transitions)
+        
+        public void StopCurrentState()
         {
-            if (!_transitions.ContainsKey(state))
-            {
-                _transitions[state] = new List<ITransition>();
-            }
-
-            _transitions[state].AddRange(transitions);
+            ExitCurrentState();
+            CurrentState = null;
         }
 
         private List<ITransition> GetTransitions(IState state)

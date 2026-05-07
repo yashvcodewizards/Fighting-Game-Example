@@ -11,7 +11,6 @@ namespace FightTest.Controllers
         [SerializeField] private FighterBehaviourDefinition _fighterDefinition;
 
         [SerializeField] private MonoBehaviour _inputProviderBehaviour;
-        private IInputProvider _inputProvider => _inputProviderBehaviour as IInputProvider;
         [SerializeField] private CharacterHealth _health;
         [SerializeField] private CharacterMover _mover;
         [SerializeField] private FacingSystem _facing;
@@ -21,19 +20,47 @@ namespace FightTest.Controllers
         [SerializeField] private HitDetector _hitDetector;
         [SerializeField] private HitHandler _hitHandler;
         [SerializeField] private HitBoxManager _hitBoxManager;
+        // TODO Add Presentation
+        
+        private IInputProvider _inputProvider => _inputProviderBehaviour as IInputProvider;
         
         private HitStunTimer _hitStunTimer;
         private StateMachine.StateMachine _root;
         private FighterServices _services;
         private FighterBehaviourContext _context;
         private FighterRuntime _runtime;
-        public FighterQueries Queries => _runtime.Queries;
+        
+        private bool _isInitialized;
         
         private void Awake()
         {
+            BuildRuntime();
+        }
+        
+        private void Start()
+        {
+            if (_fighterDefinition != null)
+            {
+                InitializeFighter(_fighterDefinition);
+            }
+        }
+        
+        private void FixedUpdate()
+        {
+            if (_isInitialized)
+            {
+                return;
+            }
+            
+            _context.Frame = _inputProvider?.GetFrame() ?? default;
+            _root.Tick();
+        }
+        
+        private void BuildRuntime()
+        {
             _hitStunTimer = new HitStunTimer();
             _root = new StateMachine.StateMachine();
-            
+
             _services = new FighterServices(
                 _health,
                 _mover,
@@ -51,35 +78,42 @@ namespace FightTest.Controllers
 
             _context = new FighterBehaviourContext();
             _runtime = new FighterRuntime(_services, _context);
-
-            _fighterDefinition.Initialize(_runtime);
-            
-            var package = _fighterDefinition.Build(_runtime);
-            _root.Init(package, _runtime);
-        }
-
-        private void FixedUpdate()
-        {
-            _context.Frame = _inputProvider?.GetFrame() ?? default;
-
-            _root.Tick();
         }
         
-        /*public void ChangeBehaviour(FighterBehaviourDefinition newDefinition)
+        public void InitializeFighter(FighterBehaviourDefinition fighterDefinition)
         {
-            _stateMachine.StopCurrentState();
+            if (fighterDefinition == null)
+            {
+                Debug.LogError($"{name} cannot initialize with a null FighterBehaviourDefinition.");
+                return;
+            }
+            
+            if (_isInitialized)
+            {
+                ResetCurrentFighter();
+            }
 
-            _presentation.Clear();
-            _hitboxes.Clear();
+            _fighterDefinition = fighterDefinition;
+            _fighterDefinition.Initialize(_runtime);
 
-            _definition = newDefinition;
-            _definition.Initialize(_runtime.Services);
+            var package = _fighterDefinition.Build(_runtime);
+            if (package == null)
+            {
+                Debug.LogError($"{name} failed to build FighterBehaviourPackage.");
+                return;
+            }
 
-            var package = _definition.Build(_runtime);
+            _root.Init(package, _runtime);
+            _isInitialized = true;
+        }
+        
+        private void ResetCurrentFighter()
+        {
+            _root.StopCurrentState();
+            _hitBoxManager.ClearAll();
+            _context.Reset();
 
-            _runtime.Context.ResetForNewBehaviour();
-
-            _stateMachine.Init(package, _runtime);
-        }*/
+            _isInitialized = false;
+        }
     }
 }

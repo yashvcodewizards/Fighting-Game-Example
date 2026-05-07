@@ -11,14 +11,16 @@ namespace FighterBehaviour
     {
         public InputFrame Frame;
         
-        //Jump
-        public float PendingJumpDirectionX;
-        public bool SuppressNextJump;
-        
         //Attack
         public HitInfo? PendingHit;
-        public bool AttackHasHitThisSwing;
-        public float AttackTimer;
-        public bool AttackWasInActive;
+
+        public int CurrentStateFrame;
+        
+        public void Reset()
+        {
+            Frame = default;
+            PendingHit = null;
+            CurrentStateFrame = 0;
+        }
     }
 }
