@@ -13,12 +13,16 @@ namespace FightTest.StateMachine
 
         private FighterRuntime _runtime;
 
+        private FighterStateRegistry _stateRegistry;
+        public FighterStateRegistry StateRegistry => _stateRegistry;
+
         public IState CurrentState { get; private set; }
 
         public void Init(FighterBehaviourPackage behaviourPackage, FighterRuntime runtime)
         {
             _transitions = behaviourPackage.Transitions;
             _runtime = runtime;
+            _stateRegistry = behaviourPackage.StateRegistry;
             
             ChangeState(behaviourPackage.InitialState);
         }

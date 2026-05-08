@@ -19,6 +19,11 @@ namespace FighterBehaviour
         {
             InitialState = Get(key);
         }
+        
+        public bool Has(string key)
+        {
+            return _states.ContainsKey(key);
+        }
 
         public IState Get(string key)
         {

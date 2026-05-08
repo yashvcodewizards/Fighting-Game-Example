@@ -9,6 +9,8 @@ namespace FightTest.Systems
     {
         private FighterRuntime _runtime;
 
+        public FighterRuntime Runtime => _runtime;
+
         public void Initialize(FighterRuntime runtime)
         {
             _runtime = runtime;

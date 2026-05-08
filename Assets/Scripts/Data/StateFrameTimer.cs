@@ -13,6 +13,11 @@ namespace FightTest.States
             DurationFrames = durationFrames;
         }
 
+        public void SetDuration(int durationFrames = 0)
+        {
+            DurationFrames = durationFrames;
+        }
+
         public void Tick()
         {
             CurrentFrame++;
@@ -22,6 +27,11 @@ namespace FightTest.States
         {
             CurrentFrame = 0;
             DurationFrames = 0;
+        }
+        
+        public void ForceFinish()
+        {
+            DurationFrames = CurrentFrame;
         }
 
         public void Restore(int currentFrame, int durationFrames)

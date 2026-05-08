@@ -16,10 +16,15 @@ namespace FighterBehaviour.FighterBehaviours
 
         [Header("Health")] public int MaxHealth = 100;
 
-        [Header("BoxData")] public BoxProfile IdleBoxProfile;
+        [Header("BoxData")] 
+        public BoxProfile IdleBoxProfile;
+        public BoxProfile CapturedProfile;
         public BoxProfile HitStunBoxProfile;
 
         [Header("Attack Data")] public AttackData LightAttack;
+        
+        [Header("Special States")]
+        public SpecialStateAsset Special1;
 
         public override void Initialize(FighterRuntime runtime)
         {
@@ -47,6 +52,8 @@ namespace FighterBehaviour.FighterBehaviours
             // Defensive / reaction states
             var hitStun = new HitStunState(HitStunBoxProfile);
             var lightAttack = new AttackState(LightAttack, BasicFighterStateKeys.LightAttack);
+            var special1 = Special1.CreateRuntimeState();
+            var captured = new CapturedState(CapturedProfile);
 
             states.Add(BasicFighterStateKeys.Idle, idle);
             states.Add(BasicFighterStateKeys.JumpRise, jumpRise);
@@ -54,6 +61,8 @@ namespace FighterBehaviour.FighterBehaviours
             states.Add(BasicFighterStateKeys.Walk, walk);
             states.Add(BasicFighterStateKeys.HitStun, hitStun);
             states.Add(BasicFighterStateKeys.LightAttack, lightAttack);
+            states.Add(BasicFighterStateKeys.Special1, special1);
+            states.Add(BasicFighterStateKeys.Captured, captured);
 
             states.SetInitial(BasicFighterStateKeys.Idle);
 

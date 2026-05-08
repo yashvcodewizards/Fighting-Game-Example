@@ -98,6 +98,11 @@ namespace FighterBehaviour
         public bool IsTryingHeavyAttack()
         {
             return _context.Frame.HeavyAttack;
+        } 
+        
+        public bool IsTryingSpecial1()
+        {
+            return _context.Frame.Special1;
         }
 
         public bool IsTryingThrow()

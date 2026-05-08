@@ -8,5 +8,7 @@
         public const string Airborne = "Airborne";
         public const string HitStun = "HitStun";
         public const string LightAttack = "LightAttack";
+        public const string Special1 = "Special1";
+        public const string Captured = "Captured";
     }
 }

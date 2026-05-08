@@ -21,7 +21,7 @@ namespace FighterBehaviour
             var states = _behaviourData.BuildStates(runtime);
             var transitions = _transitionBuilder.BuildTransitions(runtime, states);
 
-            return new FighterBehaviourPackage(states.InitialState, transitions);
+            return new FighterBehaviourPackage(states.InitialState, transitions, states);
         }
 
         public void Initialize(FighterRuntime runtime)

@@ -1,4 +1,5 @@
-﻿using System.Collections.Generic;
+﻿using System;
+using System.Collections.Generic;
 using FightTest.StateMachine;
 using FightTest.States;
 using UnityEngine;
@@ -26,6 +27,8 @@ namespace FighterBehaviour.FighterBehaviours
             var airborne = states.Get(BasicFighterStateKeys.Airborne);
             var hitStun = states.Get<HitStunState>(BasicFighterStateKeys.HitStun);
             var lightAttack = states.Get<AttackState>(BasicFighterStateKeys.LightAttack);
+            var special1 = states.Get(BasicFighterStateKeys.Special1);
+            var captured = states.Get(BasicFighterStateKeys.Captured);
 
             // Root transitions
             RegisterCanJumpTransition(idle);
@@ -59,12 +62,19 @@ namespace FighterBehaviour.FighterBehaviours
                 hitStun,
                 new Transition(() => queries.IsStateFinished(), () => idle)
             );
+            
+            RegisterTransitions(
+                captured,
+                new Transition(() => queries.IsStateFinished(), () => idle)
+            );
 
             RegisterTransitions(
                 lightAttack,
                 new Transition(() => queries.IsPendingHit(), () => hitStun),
                 new Transition(() => queries.IsStateFinished(), () => idle)
             );
+            
+            RegisterSpecialTransition(special1, queries.IsTryingSpecial1);
 
             return transitions;
 
@@ -94,6 +104,32 @@ namespace FighterBehaviour.FighterBehaviours
                 }
 
                 transitions[state].AddRange(stateTransitions);
+            }
+            
+            void RegisterSpecialTransition(IState specialState, Func<bool> inputCondition)
+            {
+                if (specialState == null)
+                {
+                    return;
+                }
+
+                RegisterTransitions(
+                    idle,
+                    new Transition(inputCondition, () => specialState)
+                );
+
+                RegisterTransitions(
+                    walk,
+                    new Transition(inputCondition, () => specialState)
+                );
+
+                RegisterTransitions(
+                    specialState,
+                    new Transition(
+                        () => runtime.Services.StateFrameTimer.IsFinished,
+                        () => idle
+                    )
+                );
             }
         }
     }

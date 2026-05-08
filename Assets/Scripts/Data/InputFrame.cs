@@ -11,8 +11,9 @@ namespace FightTest.Data
         public readonly bool Throw;
         public readonly bool Sprint;
         public readonly bool BackDash;
+        public readonly bool Special1;
 
-        public InputFrame(float moveX, float moveY, bool light, bool heavy, bool sprint = false, bool backDash = false)
+        public InputFrame(float moveX, float moveY, bool light, bool heavy, bool sprint = false, bool backDash = false, bool special1 = false)
         {
             MoveX = moveX;
             MoveY = moveY;
@@ -23,6 +24,7 @@ namespace FightTest.Data
             Throw = light && heavy;
             Sprint = sprint;
             BackDash = backDash;
+            Special1 = special1;
         }
     }
 }
