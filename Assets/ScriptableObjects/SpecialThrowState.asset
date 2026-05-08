@@ -18,8 +18,7 @@ MonoBehaviour:
   grabRange: 1.5
   hurtboxLayer:
     serializedVersion: 2
-    m_Bits: 0
+    m_Bits: 512
   targetOffset: 1.25
-  throwResultData: {fileID: 0}
+  throwResultData: {fileID: 11400000, guid: 40d103f77a242c94cb5b7fe09a7d342e, type: 2}
   throwAnimation: Throw
-  capturedAnimation: Captured

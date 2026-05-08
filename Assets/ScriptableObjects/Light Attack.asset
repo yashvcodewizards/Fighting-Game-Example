@@ -16,6 +16,6 @@ MonoBehaviour:
   LungeForce: {x: 2, y: 0}
   LungeFrame: 0
   Damage: 7
-  EnemyHitStunFrames: 4
+  EnemyHitStunFrames: 200
   Knockback: {x: 3, y: 0}
   KnocksDown: 0

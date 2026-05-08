@@ -24,7 +24,7 @@ namespace FightTest.Data
             Throw = light && heavy;
             Sprint = sprint;
             BackDash = backDash;
-            Special1 = special1;
+            Special1 = Throw;
         }
     }
 }

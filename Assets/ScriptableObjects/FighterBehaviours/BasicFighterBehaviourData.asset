@@ -17,5 +17,7 @@ MonoBehaviour:
   JumpForce: 10
   MaxHealth: 100
   IdleBoxProfile: {fileID: 11400000, guid: 4e3e40e530972fb469e1501399d092c6, type: 2}
+  CapturedProfile: {fileID: 11400000, guid: 4e3e40e530972fb469e1501399d092c6, type: 2}
   HitStunBoxProfile: {fileID: 11400000, guid: 5566cc6a8c025e746b7ce8ecfedf32da, type: 2}
   LightAttack: {fileID: 11400000, guid: 40d103f77a242c94cb5b7fe09a7d342e, type: 2}
+  Special1: {fileID: 11400000, guid: 1ec2606ba6d7b8b46a12f449938744e6, type: 2}
