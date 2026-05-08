@@ -29,7 +29,7 @@ namespace FightTest.Systems
             filter.SetLayerMask(_hitLayer);
             filter.useTriggers = true;
 
-            foreach (var hitbox in attacker.Services.HitBoxManager.ActiveHitBoxes)
+            foreach (var hitbox in attacker.Services.ColliderManager.ActiveHitBoxes)
             {
                 if (hitbox == null || !hitbox.enabled)
                 {

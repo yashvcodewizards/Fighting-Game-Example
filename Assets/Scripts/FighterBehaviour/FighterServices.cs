@@ -21,7 +21,7 @@ namespace FighterBehaviour
         public StateMachine Root { get; }
         public GameObject Self { get; }
         public StateTimer StateTimer { get; }
-        public HitBoxManager HitBoxManager { get; }
+        public ColliderManager ColliderManager { get; }
         public HitDetector HitDetector { get; }
         public HitHandler HitHandler { get; }
         
@@ -37,7 +37,7 @@ namespace FighterBehaviour
             StateMachine root,
             GameObject self,
             StateTimer stateTimer,
-            HitBoxManager hitBoxManager,
+            ColliderManager colliderManager,
             HitDetector hitDetector,
             HitHandler hitHandler,
             FighterPresentation presentation)
@@ -51,7 +51,7 @@ namespace FighterBehaviour
             Root = root;
             Self = self;
             StateTimer = stateTimer;
-            HitBoxManager = hitBoxManager;
+            ColliderManager = colliderManager;
             HitDetector = hitDetector;
             HitHandler = hitHandler;
             Presentation = presentation;

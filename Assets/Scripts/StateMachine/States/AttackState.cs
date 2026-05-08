@@ -37,13 +37,13 @@ namespace FightTest.States
         {
             TryLunge(runtime);
             
-            runtime.Services.HitBoxManager.ApplyTimelineFrame(_data.ColliderTimeline, runtime.Services.StateTimer.CurrentFrame);
+            runtime.Services.ColliderManager.ApplyTimelineFrame(_data.ColliderTimeline, runtime.Services.StateTimer.CurrentFrame);
             runtime.Services.HitDetector.TryHit(runtime, _data);
         }
 
         public void Exit(FighterRuntime runtime)
         {
-            runtime.Services.HitBoxManager.ClearHitboxes();
+            runtime.Services.ColliderManager.ClearHitboxes();
         }
 
         private void TryLunge(FighterRuntime runtime)

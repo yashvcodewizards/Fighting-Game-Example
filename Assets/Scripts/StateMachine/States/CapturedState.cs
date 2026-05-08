@@ -17,7 +17,7 @@ namespace FightTest.States
 
         public void Enter(FighterRuntime runtime)
         {
-            runtime.Services.HitBoxManager.ApplyProfile(_colliderProfile);
+            runtime.Services.ColliderManager.ApplyProfile(_colliderProfile);
             runtime.Services.Presentation.Play(_animationLabel);
         }
 

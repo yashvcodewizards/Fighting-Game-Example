@@ -4,7 +4,7 @@ using UnityEngine;
 
 namespace FightTest.Systems
 {
-    public class HitBoxManager : MonoBehaviour
+    public class ColliderManager : MonoBehaviour
     {
         [Header("Box Slots")] [SerializeField] private BoxCollider2D[] hitboxSlots;
         [SerializeField] private BoxCollider2D[] hurtboxSlots;

@@ -19,7 +19,7 @@ namespace FightTest.Controllers
         [SerializeField] private Rigidbody2D _rb;
         [SerializeField] private HitDetector _hitDetector;
         [SerializeField] private HitHandler _hitHandler;
-        [SerializeField] private HitBoxManager _hitBoxManager;
+        [SerializeField] private ColliderManager _colliderManager;
         [SerializeField] private FighterPresentation _fighterPresentation;
         
         private IInputProvider _inputProvider => _inputProviderBehaviour as IInputProvider;
@@ -79,7 +79,7 @@ namespace FightTest.Controllers
                 _root,
                 gameObject,
                 _stateTimer,
-                _hitBoxManager,
+                _colliderManager,
                 _hitDetector,
                 _hitHandler,
                 _fighterPresentation
@@ -119,7 +119,7 @@ namespace FightTest.Controllers
         private void ResetCurrentFighter()
         {
             _root.StopCurrentState();
-            _hitBoxManager.ClearAll();
+            _colliderManager.ClearAll();
             _context.Reset();
 
             _isInitialized = false;
