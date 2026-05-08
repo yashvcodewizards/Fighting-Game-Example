@@ -2495,6 +2495,7 @@ GameObject:
   m_Component:
   - component: {fileID: 493072865}
   - component: {fileID: 493072866}
+  - component: {fileID: 493072867}
   m_Layer: 0
   m_Name: Square
   m_TagString: Untagged
@@ -2568,6 +2569,25 @@ SpriteRenderer:
   m_WasSpriteAssigned: 1
   m_MaskInteraction: 0
   m_SpriteSortPoint: 0
+--- !u!95 &493072867
+Animator:
+  serializedVersion: 3
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 493072864}
+  m_Enabled: 1
+  m_Avatar: {fileID: 0}
+  m_Controller: {fileID: 0}
+  m_CullingMode: 0
+  m_UpdateMode: 0
+  m_ApplyRootMotion: 0
+  m_LinearVelocityBlending: 0
+  m_WarningMessage: 
+  m_HasTransformHierarchy: 1
+  m_AllowConstantClipSamplingOptimization: 1
+  m_KeepAnimatorControllerStateOnDisable: 0
 --- !u!1 &551775584
 GameObject:
   m_ObjectHideFlags: 0
@@ -5109,6 +5129,7 @@ GameObject:
   - component: {fileID: 1446321906}
   - component: {fileID: 1446321905}
   - component: {fileID: 1446321915}
+  - component: {fileID: 1446321916}
   m_Layer: 0
   m_Name: Big Bad ooh
   m_TagString: Untagged
@@ -5231,6 +5252,7 @@ MonoBehaviour:
   _hitDetector: {fileID: 1446321915}
   _hitHandler: {fileID: 1446321906}
   _hitBoxManager: {fileID: 1098473197}
+  _fighterPresentation: {fileID: 1446321916}
 --- !u!50 &1446321913
 Rigidbody2D:
   serializedVersion: 4
@@ -5296,6 +5318,19 @@ MonoBehaviour:
   _hitLayer:
     serializedVersion: 2
     m_Bits: 512
+--- !u!114 &1446321916
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 1446321904}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: 016d75e0b23a4afaa170bd645034b888, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: 
+  _animator: {fileID: 1684369206}
 --- !u!1 &1479317483
 GameObject:
   m_ObjectHideFlags: 0
@@ -6124,6 +6159,7 @@ GameObject:
   m_Component:
   - component: {fileID: 1684369204}
   - component: {fileID: 1684369205}
+  - component: {fileID: 1684369206}
   m_Layer: 0
   m_Name: Square
   m_TagString: Untagged
@@ -6197,6 +6233,25 @@ SpriteRenderer:
   m_WasSpriteAssigned: 1
   m_MaskInteraction: 0
   m_SpriteSortPoint: 0
+--- !u!95 &1684369206
+Animator:
+  serializedVersion: 3
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 1684369203}
+  m_Enabled: 1
+  m_Avatar: {fileID: 0}
+  m_Controller: {fileID: 0}
+  m_CullingMode: 0
+  m_UpdateMode: 0
+  m_ApplyRootMotion: 0
+  m_LinearVelocityBlending: 0
+  m_WarningMessage: 
+  m_HasTransformHierarchy: 1
+  m_AllowConstantClipSamplingOptimization: 1
+  m_KeepAnimatorControllerStateOnDisable: 0
 --- !u!1 &1772210009
 GameObject:
   m_ObjectHideFlags: 0
@@ -9897,6 +9952,7 @@ GameObject:
   - component: {fileID: 4984973924231160270}
   - component: {fileID: 2486073340216499605}
   - component: {fileID: 3722673737033375511}
+  - component: {fileID: 3722673737033375512}
   m_Layer: 0
   m_Name: Player
   m_TagString: Untagged
@@ -9955,6 +10011,7 @@ MonoBehaviour:
   _hitDetector: {fileID: 3722673737033375511}
   _hitHandler: {fileID: 2486073340216499605}
   _hitBoxManager: {fileID: 7184815308011446485}
+  _fighterPresentation: {fileID: 3722673737033375512}
 --- !u!114 &3722673737033375511
 MonoBehaviour:
   m_ObjectHideFlags: 0
@@ -9970,6 +10027,19 @@ MonoBehaviour:
   _hitLayer:
     serializedVersion: 2
     m_Bits: 512
+--- !u!114 &3722673737033375512
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 3722673737033375507}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: 016d75e0b23a4afaa170bd645034b888, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: 
+  _animator: {fileID: 493072867}
 --- !u!4 &3775008200907157360
 Transform:
   m_ObjectHideFlags: 0
