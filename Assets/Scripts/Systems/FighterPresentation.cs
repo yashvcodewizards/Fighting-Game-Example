@@ -8,7 +8,7 @@ namespace FightTest.Systems
 
         public void Play(string animationName)
         {
-            if (_animator == null || string.IsNullOrWhiteSpace(animationName))
+            if (_animator == null || _animator.runtimeAnimatorController == null || string.IsNullOrWhiteSpace(animationName))
             {
                 return;
             }

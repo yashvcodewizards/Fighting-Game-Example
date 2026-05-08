@@ -28,7 +28,6 @@ namespace FighterBehaviour.FighterBehaviours
             var hitStun = states.Get<HitStunState>(BasicFighterStateKeys.HitStun);
             var lightAttack = states.Get<AttackState>(BasicFighterStateKeys.LightAttack);
             var special1 = states.Get(BasicFighterStateKeys.Special1);
-            var captured = states.Get(BasicFighterStateKeys.Captured);
 
             // Root transitions
             RegisterCanJumpTransition(idle);
@@ -60,11 +59,6 @@ namespace FighterBehaviour.FighterBehaviours
 
             RegisterTransitions(
                 hitStun,
-                new Transition(() => queries.IsStateFinished(), () => idle)
-            );
-            
-            RegisterTransitions(
-                captured,
                 new Transition(() => queries.IsStateFinished(), () => idle)
             );
 
