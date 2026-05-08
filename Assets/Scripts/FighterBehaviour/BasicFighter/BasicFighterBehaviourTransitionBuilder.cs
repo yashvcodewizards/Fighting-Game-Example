@@ -37,14 +37,14 @@ namespace FighterBehaviour.FighterBehaviours
             // Ground transitions
             RegisterTransitions(
                 idle,
-                new Transition(() => queries.IsPendingHit(), () => hitStun),
+                new HitReactionTransition(() => queries.IsPendingHit(), () => hitStun, HitReactionType.Hit),
                 new Transition(() => queries.CanWalkFromIdle(), () => walk),
                 new Transition(() => queries.IsTryingLightAttack(), () => lightAttack)
             );
 
             RegisterTransitions(
                 walk,
-                new Transition(() => queries.IsPendingHit(), () => hitStun),
+                new HitReactionTransition(() => queries.IsPendingHit(), () => hitStun, HitReactionType.Hit),
                 new Transition(() => queries.IsNeutral() && !queries.IsDucking(), () => idle),
                 new Transition(() => queries.IsTryingLightAttack(), () => lightAttack)
             );
