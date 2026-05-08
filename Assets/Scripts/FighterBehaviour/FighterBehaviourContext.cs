@@ -13,14 +13,11 @@ namespace FighterBehaviour
         
         //Attack
         public HitInfo? PendingHit;
-
-        public int CurrentStateFrame;
         
         public void Reset()
         {
             Frame = default;
             PendingHit = null;
-            CurrentStateFrame = 0;
         }
     }
 }

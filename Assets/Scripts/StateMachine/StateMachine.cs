@@ -44,6 +44,7 @@ namespace FightTest.StateMachine
             }
 
             CurrentState.Tick(_runtime);
+            _runtime.Services.StateFrameTimer.Tick();
         }
 
         public void ChangeState(IState next)
@@ -57,6 +58,8 @@ namespace FightTest.StateMachine
             Debug.Log($"State change: {CurrentState?.GetType().Name ?? "NULL"} -> {next.GetType().Name}");
             
             ExitCurrentState();
+            
+            _runtime.Services.StateFrameTimer.Reset();
             
             CurrentState = next;
             next.Enter(_runtime);

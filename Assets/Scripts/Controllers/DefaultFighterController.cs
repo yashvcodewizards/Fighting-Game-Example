@@ -24,7 +24,7 @@ namespace FightTest.Controllers
         
         private IInputProvider _inputProvider => _inputProviderBehaviour as IInputProvider;
         
-        private HitStunTimer _hitStunTimer;
+        private StateFrameTimer _stateFrameTimer;
         private StateMachine.StateMachine _root;
         private FighterServices _services;
         private FighterBehaviourContext _context;
@@ -58,7 +58,7 @@ namespace FightTest.Controllers
         
         private void BuildRuntime()
         {
-            _hitStunTimer = new HitStunTimer();
+            _stateFrameTimer = new StateFrameTimer();
             _root = new StateMachine.StateMachine();
 
             _services = new FighterServices(
@@ -70,7 +70,7 @@ namespace FightTest.Controllers
                 _rb,
                 _root,
                 gameObject,
-                _hitStunTimer,
+                _stateFrameTimer,
                 _hitBoxManager,
                 _hitDetector,
                 _hitHandler

@@ -133,5 +133,10 @@ namespace FighterBehaviour
         {
             return _context.PendingHit.HasValue;
         }
+
+        public bool IsStateFinished()
+        {
+            return _services.StateFrameTimer.IsFinished && _services.StateFrameTimer.DurationFrames > 0;
+        }
     }
 }

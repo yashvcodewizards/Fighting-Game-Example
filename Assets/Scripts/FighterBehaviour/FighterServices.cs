@@ -20,7 +20,7 @@ namespace FighterBehaviour
         public Rigidbody2D Rb { get; }
         public StateMachine Root { get; }
         public GameObject Self { get; }
-        public HitStunTimer HitStunTimer { get; }
+        public StateFrameTimer StateFrameTimer { get; }
         public HitBoxManager HitBoxManager { get; }
         public HitDetector HitDetector { get; }
         public HitHandler HitHandler { get; }
@@ -36,7 +36,7 @@ namespace FighterBehaviour
             Rigidbody2D rb,
             StateMachine root,
             GameObject self,
-            HitStunTimer hitStunTimer,
+            StateFrameTimer stateFrameTimer,
             HitBoxManager hitBoxManager,
             HitDetector hitDetector,
             HitHandler hitHandler)
@@ -49,7 +49,7 @@ namespace FighterBehaviour
             Rb = rb;
             Root = root;
             Self = self;
-            HitStunTimer = hitStunTimer;
+            StateFrameTimer = stateFrameTimer;
             HitBoxManager = hitBoxManager;
             HitDetector = hitDetector;
             HitHandler = hitHandler;

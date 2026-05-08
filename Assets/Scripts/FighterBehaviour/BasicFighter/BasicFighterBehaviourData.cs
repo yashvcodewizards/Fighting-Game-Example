@@ -45,7 +45,7 @@ namespace FighterBehaviour.FighterBehaviours
             );
 
             // Defensive / reaction states
-            var hitStun = new HitStunState(HitStunBoxProfile, runtime.Services.HitStunTimer);
+            var hitStun = new HitStunState(HitStunBoxProfile, runtime.Services.StateFrameTimer);
             var lightAttack = new AttackState(LightAttack, BasicFighterStateKeys.LightAttack);
 
             states.Add(BasicFighterStateKeys.Idle, idle);

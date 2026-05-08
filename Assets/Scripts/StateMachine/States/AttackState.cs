@@ -10,7 +10,6 @@ namespace FightTest.States
         private readonly AttackData _data;
         private readonly string _label;
 
-        private int _currentFrame;
         private bool _hasLunged;
 
         public AttackState(
@@ -20,20 +19,17 @@ namespace FightTest.States
             _data = data;
             _label = label;
         }
-
-        public bool IsFinished { get; private set; }
-        private int TotalFrames => _data.BoxTimeline != null
-            ? _data.BoxTimeline.TotalFrames
-            : 0;
         
         public void Enter(FighterRuntime runtime)
         {
-            _currentFrame = 0;
             _hasLunged = false;
-            IsFinished = false;
             
+            var duration = _data.BoxTimeline
+                ? _data.BoxTimeline.TotalFrames
+                : 0;
+            
+            runtime.Services.StateFrameTimer.Start(duration);
             runtime.Services.HitDetector.BeginAttack();
-            
             
             // Later:
             // runtime.Services.Animation.Play(_label);
@@ -43,22 +39,13 @@ namespace FightTest.States
         {
             TryLunge(runtime);
             
-            runtime.Services.HitBoxManager.ApplyTimelineFrame(_data.BoxTimeline, _currentFrame);
+            runtime.Services.HitBoxManager.ApplyTimelineFrame(_data.BoxTimeline, runtime.Services.StateFrameTimer.CurrentFrame);
             runtime.Services.HitDetector.TryHit(runtime, _data);
-            
-            _currentFrame++;
-            
-            if (_currentFrame >= TotalFrames)
-            {
-                IsFinished = true;
-            }
         }
 
         public void Exit(FighterRuntime runtime)
         {
             runtime.Services.HitBoxManager.ClearHitboxes();
-            
-            IsFinished = false;
         }
 
         private void TryLunge(FighterRuntime runtime)
@@ -73,7 +60,7 @@ namespace FightTest.States
                 return;
             }
 
-            if (_currentFrame < _data.LungeFrame)
+            if (runtime.Services.StateFrameTimer.CurrentFrame < _data.LungeFrame)
             {
                 return;
             }

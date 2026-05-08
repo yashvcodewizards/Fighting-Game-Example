@@ -63,7 +63,7 @@ namespace FighterBehaviour.FighterBehaviours
             RegisterTransitions(
                 lightAttack,
                 new Transition(() => queries.IsPendingHit(), () => hitStun),
-                new Transition(() => lightAttack.IsFinished, () => idle)
+                new Transition(() => queries.IsStateFinished(), () => idle)
             );
 
             return transitions;

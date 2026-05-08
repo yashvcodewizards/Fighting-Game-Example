@@ -8,9 +8,9 @@ namespace FightTest.States
     public sealed class HitStunState : IState
     {
         private readonly BoxProfile _boxProfile;
-        private readonly HitStunTimer _timer;
+        private readonly StateFrameTimer _timer;
 
-        public HitStunState(BoxProfile boxProfile, HitStunTimer timer)
+        public HitStunState(BoxProfile boxProfile, StateFrameTimer timer)
         {
             _boxProfile = boxProfile;
             _timer = timer;
@@ -27,7 +27,7 @@ namespace FightTest.States
             if (!pendingHit.HasValue)
             {
                 runtime.Context.PendingHit = null;
-                _timer.Configure(0);
+                _timer.Start(0);
                 return;
             }
             
@@ -45,7 +45,7 @@ namespace FightTest.States
                 )
             );
 
-            _timer.Configure(data.EnemyHitStunFrames);
+            _timer.Start(data.EnemyHitStunFrames);
         }
 
         public void Tick(FighterRuntime runtime)
