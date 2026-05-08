@@ -27,7 +27,7 @@ namespace FightTest.Controllers
         private StateTimer _stateTimer;
         private StateMachine.StateMachine _root;
         private FighterServices _services;
-        private FighterBehaviourContext _context;
+        private FighterContext _context;
         private FighterRuntime _runtime;
         
         private bool _isInitialized;
@@ -85,7 +85,7 @@ namespace FightTest.Controllers
                 _fighterPresentation
             );
 
-            _context = new FighterBehaviourContext();
+            _context = new FighterContext();
             _runtime = new FighterRuntime(_services, _context);
         }
         

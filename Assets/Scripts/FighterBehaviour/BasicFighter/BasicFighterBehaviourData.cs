@@ -32,9 +32,9 @@ namespace FighterBehaviour.FighterBehaviours
             runtime.Services.HitHandler.Initialize(runtime);
         }
 
-        public override FighterStateRegistry BuildStates(FighterRuntime runtime)
+        public override StateRegistry BuildStates(FighterRuntime runtime)
         {
-            var states = new FighterStateRegistry();
+            var states = new StateRegistry();
 
             // Simple states
             var idle = new SimpleState(IdleColliderProfile);

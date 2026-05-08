@@ -8,10 +8,10 @@
     public sealed class FighterRuntime
     {
         public FighterServices Services { get; }
-        public FighterBehaviourContext Context { get; }
+        public FighterContext Context { get; }
         public FighterQueries Queries { get; }
 
-        public FighterRuntime(FighterServices services, FighterBehaviourContext context)
+        public FighterRuntime(FighterServices services, FighterContext context)
         {
             Services = services;
             Context = context;

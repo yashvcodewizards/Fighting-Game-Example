@@ -11,12 +11,12 @@ namespace FighterBehaviour
     {
         public IState InitialState { get; }
         public Dictionary<IState, List<ITransition>> Transitions { get; }
-        public FighterStateRegistry StateRegistry { get; set; }
+        public StateRegistry StateRegistry { get; set; }
 
         public FighterBehaviourPackage(
             IState initialState,
             Dictionary<IState, List<ITransition>> transitions,
-            FighterStateRegistry stateRegistry)
+            StateRegistry stateRegistry)
         {
             InitialState = initialState;
             Transitions = transitions;

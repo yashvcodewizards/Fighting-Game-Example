@@ -15,7 +15,7 @@ namespace FighterBehaviour.FighterBehaviours
         }
 
         public override Dictionary<IState, List<ITransition>> BuildTransitions(FighterRuntime runtime,
-            FighterStateRegistry states)
+            StateRegistry states)
         {
             var transitions = new Dictionary<IState, List<ITransition>>();
 

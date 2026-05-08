@@ -13,9 +13,9 @@ namespace FighterBehaviour
     public class FighterQueries
     {
         private readonly FighterServices _services;
-        private readonly FighterBehaviourContext _context;
+        private readonly FighterContext _context;
 
-        public FighterQueries(FighterServices services, FighterBehaviourContext context)
+        public FighterQueries(FighterServices services, FighterContext context)
         {
             _services = services;
             _context = context;

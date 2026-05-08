@@ -10,6 +10,6 @@ namespace FighterBehaviour
         
         public abstract Dictionary<IState, List<ITransition>> BuildTransitions(
             FighterRuntime runtime,
-            FighterStateRegistry states);
+            StateRegistry states);
     }
 }

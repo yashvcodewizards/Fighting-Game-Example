@@ -4,7 +4,7 @@ using FightTest.StateMachine;
 
 namespace FighterBehaviour
 {
-    public sealed class FighterStateRegistry
+    public sealed class StateRegistry
     {
         private readonly Dictionary<string, IState> _states = new Dictionary<string, IState>();
 

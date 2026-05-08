@@ -13,8 +13,8 @@ namespace FightTest.StateMachine
 
         private FighterRuntime _runtime;
 
-        private FighterStateRegistry _stateRegistry;
-        public FighterStateRegistry StateRegistry => _stateRegistry;
+        private StateRegistry _stateRegistry;
+        public StateRegistry StateRegistry => _stateRegistry;
 
         public IState CurrentState { get; private set; }
 
