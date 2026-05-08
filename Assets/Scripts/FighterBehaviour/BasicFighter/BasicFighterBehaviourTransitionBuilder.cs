@@ -57,7 +57,7 @@ namespace FighterBehaviour.FighterBehaviours
 
             RegisterTransitions(
                 hitStun,
-                new Transition(() => hitStun.IsFinished, () => idle)
+                new Transition(() => queries.IsStateFinished(), () => idle)
             );
 
             RegisterTransitions(

@@ -8,16 +8,16 @@ namespace FightTest.States
     public sealed class AttackState : IState
     {
         private readonly AttackData _data;
-        private readonly string _label;
+        private readonly string _animationLabel;
 
         private bool _hasLunged;
 
         public AttackState(
             AttackData data,
-            string label)
+            string animationLabel)
         {
             _data = data;
-            _label = label;
+            _animationLabel = animationLabel;
         }
         
         public void Enter(FighterRuntime runtime)
@@ -28,11 +28,9 @@ namespace FightTest.States
                 ? _data.BoxTimeline.TotalFrames
                 : 0;
             
-            runtime.Services.StateFrameTimer.Start(duration);
             runtime.Services.HitDetector.BeginAttack();
-            
-            // Later:
-            // runtime.Services.Animation.Play(_label);
+            runtime.Services.Presentation.Play(_animationLabel);
+            runtime.Services.StateFrameTimer.Start(duration);
         }
 
         public void Tick(FighterRuntime runtime)

@@ -8,15 +8,13 @@ namespace FightTest.States
     public sealed class HitStunState : IState
     {
         private readonly BoxProfile _boxProfile;
-        private readonly StateFrameTimer _timer;
+        private readonly string _animationLabel;
 
-        public HitStunState(BoxProfile boxProfile, StateFrameTimer timer)
+        public HitStunState(BoxProfile boxProfile, string animationLabel = null)
         {
             _boxProfile = boxProfile;
-            _timer = timer;
+            _animationLabel = animationLabel;
         }
-
-        public bool IsFinished => _timer.IsFinished;
 
         public void Enter(FighterRuntime runtime)
         {
@@ -27,7 +25,7 @@ namespace FightTest.States
             if (!pendingHit.HasValue)
             {
                 runtime.Context.PendingHit = null;
-                _timer.Start(0);
+                runtime.Services.StateFrameTimer.Start(0);
                 return;
             }
             
@@ -44,13 +42,14 @@ namespace FightTest.States
                     data.Knockback.y
                 )
             );
-
-            _timer.Start(data.EnemyHitStunFrames);
+            
+            runtime.Services.Presentation.Play(_animationLabel);
+            runtime.Services.StateFrameTimer.Start(data.EnemyHitStunFrames);
         }
 
         public void Tick(FighterRuntime runtime)
         {
-            _timer.Tick();
+            runtime.Services.StateFrameTimer.Tick();
         }
 
         public void Exit(FighterRuntime runtime)
