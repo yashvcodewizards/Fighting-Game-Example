@@ -7,7 +7,7 @@ namespace FightTest.Data
     public class AttackData : ScriptableObject
     {
         [Header("Hit Timing & Boxes")]
-        public BoxTimeline BoxTimeline;
+        public ColliderTimeline ColliderTimeline;
         
         // TODO Add any unique responses eg. Different enemy stun frames if they are blocked etc
 

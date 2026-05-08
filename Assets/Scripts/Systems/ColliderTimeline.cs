@@ -3,10 +3,10 @@ using UnityEngine;
 
 namespace FightTest.Systems
 {
-    [CreateAssetMenu(menuName = "Fight Test/Combat Boxes/Box Timeline")]
-    public class BoxTimeline : ScriptableObject
+    [CreateAssetMenu(menuName = "Fight Test/Combat Boxes/Collider Timeline")]
+    public class ColliderTimeline : ScriptableObject
     {
-        public BoxTimelineData[] Entries;
+        public ColliderTimelineData[] Entries;
 
         public ColliderFrameData GetFrame(int frame)
         {

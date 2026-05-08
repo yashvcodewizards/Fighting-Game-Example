@@ -3,7 +3,7 @@
 namespace FightTest.Systems
 {
     [System.Serializable]
-    public class BoxTimelineData
+    public class ColliderTimelineData
     {
         public int StartFrame;
         public int EndFrame;

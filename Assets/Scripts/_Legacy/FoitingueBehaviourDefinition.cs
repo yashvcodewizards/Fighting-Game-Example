@@ -1,4 +1,4 @@
-﻿using System.Collections.Generic;
+﻿/*using System.Collections.Generic;
 using Data;
 using FightTest.Data;
 using FightTest.StateMachine;
@@ -10,23 +10,23 @@ using UnityEngine;
 namespace FighterBehaviour
 {
     [CreateAssetMenu(menuName = "FightTest/FighterBehaviour/FoitingueBehaviour")]
-    public class FoitingueBehaviourDefinition : FighterBehaviourDefinition
+    public class FoitingueBehaviourDefinition : ScriptableObject //FighterBehaviourDefinition
     {
         // Caution Gongee below
         #region colliders test 
         [SerializeField] private ColliderSet _blockColliders;
         [SerializeField] private ColliderSet _crouchBlockColliders;
         /*[SerializeField] private ColliderSet _hitStunColliders;
-        [SerializeField] private ColliderSet _airHitStunColliders;*/
+        [SerializeField] private ColliderSet _airHitStunColliders;#1#
         [SerializeField] private ColliderSet _knockedDownColliders;
         [SerializeField] private ColliderSet _airKnockedDownColliders;
         /*[SerializeField] private ColliderSet _lightColliders;
-        [SerializeField] private ColliderSet _heavyColliders;*/
+        [SerializeField] private ColliderSet _heavyColliders;#1#
         [SerializeField] private ColliderSet _throwColliders;
         /*[SerializeField] private ColliderSet _crouchLightColliders;
         [SerializeField] private ColliderSet _crouchHeavyColliders;
         [SerializeField] private ColliderSet _airLightColliders;
-        [SerializeField] private ColliderSet _airHeavyColliders;*/
+        [SerializeField] private ColliderSet _airHeavyColliders;#1#
         [SerializeField] private ColliderSet _airThrowColliders;
         #endregion
         
@@ -54,7 +54,7 @@ namespace FighterBehaviour
         public AttackData AirLightAttack;
         public AttackData AirHeavyAttack;
         
-        public override FighterBehaviourPackage Build(FighterRuntime runtime)
+        public /*override#1# FighterBehaviourPackage Build(FighterRuntime runtime)
         {
             var services = runtime.Services;
             var context = runtime.Context;
@@ -63,7 +63,7 @@ namespace FighterBehaviour
             // Simple states
             var idle = new SimpleState(IdleBoxProfile);
             var crouch = new SimpleState(null);
-            var jumpRise = new JumpState(JumpForce);
+            var jumpRise = new JumpState(JumpForce, MoveSpeed);
             var airborne = new SimpleState(IdleBoxProfile);
 
             // Movement states
@@ -87,8 +87,8 @@ namespace FighterBehaviour
 
             var block = new BlockStunState(_blockColliders);
             var crouchBlock = new BlockStunState(_crouchBlockColliders);
-            var hitStun = new HitStunState(HitStunBoxProfile, services.HitStunTimer);
-            var airHitStun = new HitStunState(HitStunBoxProfile, services.HitStunTimer);
+            var hitStun = new HitStunState(HitStunBoxProfile, services.StateFrameTimer);
+            var airHitStun = new HitStunState(HitStunBoxProfile, services.StateFrameTimer);
             var knockedDown = new KnockedDownState(_knockedDownColliders, 75);
             var airKnockedDown = new KnockedDownState(_airKnockedDownColliders, 0);
 
@@ -207,12 +207,12 @@ namespace FighterBehaviour
 
             RegisterTransitions(
                 lightAttack,
-                new Transition(() => lightAttack.IsFinished, () => idle)
+                new Transition(() => queries.IsStateFinished(), () => idle)
             );
 
             RegisterTransitions(
                 heavyAttack,
-                new Transition(() => heavyAttack.IsFinished, () => idle)
+                new Transition(() => queries.IsStateFinished(), () => idle)
             );
 
             RegisterTransitions(
@@ -222,12 +222,12 @@ namespace FighterBehaviour
 
             RegisterTransitions(
                 crouchLightAttack,
-                new Transition(() => crouchLightAttack.IsFinished, () => crouch)
+                new Transition(() => queries.IsStateFinished(), () => crouch)
             );
 
             RegisterTransitions(
                 crouchHeavyAttack,
-                new Transition(() => crouchHeavyAttack.IsFinished, () => crouch)
+                new Transition(() => queries.IsStateFinished(), () => crouch)
             );
 
             RegisterTransitions(
@@ -258,12 +258,12 @@ namespace FighterBehaviour
 
             RegisterTransitions(
                 airLightAttack,
-                new Transition(() => airLightAttack.IsFinished, () => airborne)
+                new Transition(() => queries.IsStateFinished(), () => airborne)
             );
 
             RegisterTransitions(
                 airHeavyAttack,
-                new Transition(() => airHeavyAttack.IsFinished, () => airborne)
+                new Transition(() => queries.IsStateFinished(), () => airborne)
             );
 
             RegisterTransitions(
@@ -284,8 +284,8 @@ namespace FighterBehaviour
                         () => queries.CanJumpFromGround(),
                         () =>
                         {
-                            context.PendingJumpDirectionX = context.Frame.MoveX * MoveSpeed;
-                            context.SuppressNextJump = false;
+                            /*context.PendingJumpDirectionX = context.Frame.MoveX * MoveSpeed;
+                            context.SuppressNextJump = false;#1#
                             return jumpRise;
                         })
                 );
@@ -303,10 +303,10 @@ namespace FighterBehaviour
         }
         
         // TODO this is wrong
-        public override void Initialize(FighterRuntime runtime)
+        public /*override#1# void Initialize(FighterRuntime runtime)
         {
             runtime.Services.Health.Init(MaxHealth);
             runtime.Services.HitHandler.Initialize(runtime);
         }
     }
-}
+}*/

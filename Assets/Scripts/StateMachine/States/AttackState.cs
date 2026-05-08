@@ -24,8 +24,8 @@ namespace FightTest.States
         {
             _hasLunged = false;
             
-            var duration = _data.BoxTimeline
-                ? _data.BoxTimeline.TotalFrames
+            var duration = _data.ColliderTimeline
+                ? _data.ColliderTimeline.TotalFrames
                 : 0;
             
             runtime.Services.HitDetector.BeginAttack();
@@ -37,7 +37,7 @@ namespace FightTest.States
         {
             TryLunge(runtime);
             
-            runtime.Services.HitBoxManager.ApplyTimelineFrame(_data.BoxTimeline, runtime.Services.StateTimer.CurrentFrame);
+            runtime.Services.HitBoxManager.ApplyTimelineFrame(_data.ColliderTimeline, runtime.Services.StateTimer.CurrentFrame);
             runtime.Services.HitDetector.TryHit(runtime, _data);
         }
 

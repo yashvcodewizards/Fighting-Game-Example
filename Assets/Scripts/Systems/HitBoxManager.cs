@@ -12,7 +12,7 @@ namespace FightTest.Systems
         
         public IReadOnlyList<BoxCollider2D> ActiveHitBoxes => hitboxSlots;
 
-        public void ApplyTimelineFrame(BoxTimeline timeline, int frame)
+        public void ApplyTimelineFrame(ColliderTimeline timeline, int frame)
         {
             if (timeline == null)
             {
@@ -56,17 +56,17 @@ namespace FightTest.Systems
             ApplyHitboxes(frame.Hitboxes);
         }
 
-        public void ApplyHitboxes(ColliderData[] boxes)
+        public void ApplyHitboxes(ColliderShapeData[] boxes)
         {
             ApplyBoxesToSlots(hitboxSlots, boxes);
         }
 
-        public void ApplyHurtboxes(ColliderData[] boxes)
+        public void ApplyHurtboxes(ColliderShapeData[] boxes)
         {
             ApplyBoxesToSlots(hurtboxSlots, boxes);
         }
 
-        public void ApplyPushbox(ColliderData collider)
+        public void ApplyPushbox(ColliderShapeData colliderShape)
         {
             if (pushboxSlot == null)
             {
@@ -74,7 +74,7 @@ namespace FightTest.Systems
                 return;
             }
 
-            ApplyBox(pushboxSlot, collider);
+            ApplyBox(pushboxSlot, colliderShape);
         }
 
         public void ClearHitboxes()
@@ -93,7 +93,7 @@ namespace FightTest.Systems
             }
         }
 
-        private void ApplyBoxesToSlots(Collider2D[] slots, ColliderData[] boxes)
+        private void ApplyBoxesToSlots(Collider2D[] slots, ColliderShapeData[] boxes)
         {
             if (slots == null)
             {
@@ -113,29 +113,29 @@ namespace FightTest.Systems
             }
         }
 
-        private void ApplyBox(Collider2D col, ColliderData data)
+        private void ApplyBox(Collider2D col, ColliderShapeData shapeData)
         {
             if (col == null)
             {
                 return;
             }
 
-            col.enabled = data.Enabled;
+            col.enabled = shapeData.Enabled;
 
-            if (!data.Enabled)
+            if (!shapeData.Enabled)
             {
                 return;
             }
 
-            col.offset = data.Offset;
+            col.offset = shapeData.Offset;
 
             if (col is BoxCollider2D box)
             {
-                box.size = data.Size;
+                box.size = shapeData.Size;
             }
             else if (col is CapsuleCollider2D capsule)
             {
-                capsule.size = data.Size;
+                capsule.size = shapeData.Size;
             }
             else
             {
