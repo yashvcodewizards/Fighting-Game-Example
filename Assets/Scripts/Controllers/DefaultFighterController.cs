@@ -20,7 +20,7 @@ namespace FightTest.Controllers
         [SerializeField] private HitDetector _hitDetector;
         [SerializeField] private HitHandler _hitHandler;
         [SerializeField] private HitBoxManager _hitBoxManager;
-        // TODO Add Presentation
+        [SerializeField] private FighterPresentation _fighterPresentation;
         
         private IInputProvider _inputProvider => _inputProviderBehaviour as IInputProvider;
         
@@ -73,7 +73,8 @@ namespace FightTest.Controllers
                 _stateFrameTimer,
                 _hitBoxManager,
                 _hitDetector,
-                _hitHandler
+                _hitHandler,
+                _fighterPresentation
             );
 
             _context = new FighterBehaviourContext();

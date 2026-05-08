@@ -25,7 +25,7 @@ namespace FighterBehaviour
         public HitDetector HitDetector { get; }
         public HitHandler HitHandler { get; }
         
-        // TODO public FighterPresentation
+        public FighterPresentation Presentation { get; }
 
         public FighterServices(
             CharacterHealth health,
@@ -39,7 +39,8 @@ namespace FighterBehaviour
             StateFrameTimer stateFrameTimer,
             HitBoxManager hitBoxManager,
             HitDetector hitDetector,
-            HitHandler hitHandler)
+            HitHandler hitHandler,
+            FighterPresentation presentation)
         {
             Health = health;
             Mover = mover;
@@ -53,6 +54,7 @@ namespace FighterBehaviour
             HitBoxManager = hitBoxManager;
             HitDetector = hitDetector;
             HitHandler = hitHandler;
+            Presentation = presentation;
         }
     }
 }
