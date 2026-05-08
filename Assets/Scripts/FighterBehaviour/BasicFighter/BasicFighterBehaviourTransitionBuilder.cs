@@ -120,7 +120,7 @@ namespace FighterBehaviour.FighterBehaviours
                 RegisterTransitions(
                     specialState,
                     new Transition(
-                        () => runtime.Services.StateFrameTimer.IsFinished,
+                        () => runtime.Services.StateTimer.IsFinished,
                         () => idle
                     )
                 );

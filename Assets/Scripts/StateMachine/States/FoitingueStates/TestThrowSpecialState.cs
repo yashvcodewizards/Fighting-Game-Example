@@ -42,13 +42,13 @@ namespace FightTest.States.FoitingueStates
             _hasCaptured = false;
             _hasReleasedTarget = false;
 
-            runtime.Services.StateFrameTimer.SetDuration(startupFrames + executionFrames);
+            runtime.Services.StateTimer.SetDuration(startupFrames + executionFrames);
             runtime.Services.Presentation.Play(throwAnimation);
         }
 
         public override void Tick(FighterRuntime runtime)
         {
-            var frame = runtime.Services.StateFrameTimer.CurrentFrame;
+            var frame = runtime.Services.StateTimer.CurrentFrame;
 
             // Startup runs from frame 0 to startupFrames - 1.
             // Grab is attempted once on the final startup frame.
@@ -82,7 +82,7 @@ namespace FightTest.States.FoitingueStates
 
         private void StartWhiffRecovery(FighterRuntime runtime, int currentFrame)
         {
-            runtime.Services.StateFrameTimer.SetDuration(currentFrame + 1 + whiffRecoveryFrames);
+            runtime.Services.StateTimer.SetDuration(currentFrame + 1 + whiffRecoveryFrames);
         }
 
         private FighterRuntime TryFindTarget(FighterRuntime attacker)

@@ -143,7 +143,7 @@ namespace FighterBehaviour
 
         public bool IsStateFinished()
         {
-            return _services.StateFrameTimer.IsFinished && _services.StateFrameTimer.DurationFrames > 0;
+            return _services.StateTimer.IsFinished && _services.StateTimer.DurationFrames > 0;
         }
         
         public HitReactionType PreviewHitReaction()

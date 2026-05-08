@@ -24,7 +24,7 @@ namespace FightTest.Controllers
         
         private IInputProvider _inputProvider => _inputProviderBehaviour as IInputProvider;
         
-        private StateFrameTimer _stateFrameTimer;
+        private StateTimer _stateTimer;
         private StateMachine.StateMachine _root;
         private FighterServices _services;
         private FighterBehaviourContext _context;
@@ -32,8 +32,16 @@ namespace FightTest.Controllers
         
         private bool _isInitialized;
         
+        public bool IsInitialized => _isInitialized;
+        public FighterRuntime Runtime => _runtime;
+        
         private void Awake()
         {
+            if (_inputProviderBehaviour != null && _inputProvider == null)
+            {
+                Debug.LogError($"{name} input provider does not implement IInputProvider.");
+            }
+            
             BuildRuntime();
         }
         
@@ -58,7 +66,7 @@ namespace FightTest.Controllers
         
         private void BuildRuntime()
         {
-            _stateFrameTimer = new StateFrameTimer();
+            _stateTimer = new StateTimer();
             _root = new StateMachine.StateMachine();
 
             _services = new FighterServices(
@@ -70,7 +78,7 @@ namespace FightTest.Controllers
                 _rb,
                 _root,
                 gameObject,
-                _stateFrameTimer,
+                _stateTimer,
                 _hitBoxManager,
                 _hitDetector,
                 _hitHandler,

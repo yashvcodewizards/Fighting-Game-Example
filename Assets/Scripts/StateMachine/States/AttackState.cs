@@ -30,14 +30,14 @@ namespace FightTest.States
             
             runtime.Services.HitDetector.BeginAttack();
             runtime.Services.Presentation.Play(_animationLabel);
-            runtime.Services.StateFrameTimer.Start(duration);
+            runtime.Services.StateTimer.Start(duration);
         }
 
         public void Tick(FighterRuntime runtime)
         {
             TryLunge(runtime);
             
-            runtime.Services.HitBoxManager.ApplyTimelineFrame(_data.BoxTimeline, runtime.Services.StateFrameTimer.CurrentFrame);
+            runtime.Services.HitBoxManager.ApplyTimelineFrame(_data.BoxTimeline, runtime.Services.StateTimer.CurrentFrame);
             runtime.Services.HitDetector.TryHit(runtime, _data);
         }
 
@@ -58,7 +58,7 @@ namespace FightTest.States
                 return;
             }
 
-            if (runtime.Services.StateFrameTimer.CurrentFrame < _data.LungeFrame)
+            if (runtime.Services.StateTimer.CurrentFrame < _data.LungeFrame)
             {
                 return;
             }

@@ -10,18 +10,18 @@ namespace FightTest.States
     /// </summary>
     public sealed class SimpleState : IState
     {
-        private readonly BoxProfile _boxProfile;
+        private readonly ColliderProfile _colliderProfile;
         private readonly string _animationLabel;
         
-        public SimpleState(BoxProfile boxProfile, string animationLabel = null)
+        public SimpleState(ColliderProfile colliderProfile, string animationLabel = null)
         {
-            _boxProfile = boxProfile;
+            _colliderProfile = colliderProfile;
             _animationLabel = animationLabel;
         }
         
         public void Enter(FighterRuntime runtime)
         {
-            runtime.Services.HitBoxManager.ApplyProfile(_boxProfile);
+            runtime.Services.HitBoxManager.ApplyProfile(_colliderProfile);
             runtime.Services.Presentation.Play(_animationLabel);
         }
 

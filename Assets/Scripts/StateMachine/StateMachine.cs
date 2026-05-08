@@ -48,7 +48,7 @@ namespace FightTest.StateMachine
             }
 
             CurrentState.Tick(_runtime);
-            _runtime.Services.StateFrameTimer.Tick();
+            _runtime.Services.StateTimer.Tick();
         }
 
         public void ChangeState(IState next)
@@ -63,7 +63,7 @@ namespace FightTest.StateMachine
             
             ExitCurrentState();
             
-            _runtime.Services.StateFrameTimer.Reset();
+            _runtime.Services.StateTimer.Reset();
             
             CurrentState = next;
             next.Enter(_runtime);

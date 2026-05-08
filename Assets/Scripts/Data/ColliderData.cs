@@ -3,7 +3,7 @@
 namespace Data
 {
     [System.Serializable]
-    public struct BoxData
+    public struct ColliderData
     {
         public bool Enabled;
         public Vector2 Offset;
@@ -11,10 +11,10 @@ namespace Data
     }
     
     [System.Serializable]
-    public class BoxFrameData
+    public class ColliderFrameData
     {
-        public BoxData Pushbox;
-        public BoxData[] Hurtboxes;
-        public BoxData[] Hitboxes;
+        public ColliderData Pushbox;
+        public ColliderData[] Hurtboxes;
+        public ColliderData[] Hitboxes;
     }
 }

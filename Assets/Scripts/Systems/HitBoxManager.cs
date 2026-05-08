@@ -31,7 +31,7 @@ namespace FightTest.Systems
             ApplyFrame(boxFrame);
         }
 
-        public void ApplyProfile(BoxProfile profile)
+        public void ApplyProfile(ColliderProfile profile)
         {
             if (profile == null || profile.Frame == null)
             {
@@ -43,7 +43,7 @@ namespace FightTest.Systems
             ApplyFrame(profile.Frame);
         }
 
-        public void ApplyFrame(BoxFrameData frame)
+        public void ApplyFrame(ColliderFrameData frame)
         {
             if (frame == null)
             {
@@ -56,17 +56,17 @@ namespace FightTest.Systems
             ApplyHitboxes(frame.Hitboxes);
         }
 
-        public void ApplyHitboxes(BoxData[] boxes)
+        public void ApplyHitboxes(ColliderData[] boxes)
         {
             ApplyBoxesToSlots(hitboxSlots, boxes);
         }
 
-        public void ApplyHurtboxes(BoxData[] boxes)
+        public void ApplyHurtboxes(ColliderData[] boxes)
         {
             ApplyBoxesToSlots(hurtboxSlots, boxes);
         }
 
-        public void ApplyPushbox(BoxData box)
+        public void ApplyPushbox(ColliderData collider)
         {
             if (pushboxSlot == null)
             {
@@ -74,7 +74,7 @@ namespace FightTest.Systems
                 return;
             }
 
-            ApplyBox(pushboxSlot, box);
+            ApplyBox(pushboxSlot, collider);
         }
 
         public void ClearHitboxes()
@@ -93,7 +93,7 @@ namespace FightTest.Systems
             }
         }
 
-        private void ApplyBoxesToSlots(Collider2D[] slots, BoxData[] boxes)
+        private void ApplyBoxesToSlots(Collider2D[] slots, ColliderData[] boxes)
         {
             if (slots == null)
             {
@@ -113,7 +113,7 @@ namespace FightTest.Systems
             }
         }
 
-        private void ApplyBox(Collider2D col, BoxData data)
+        private void ApplyBox(Collider2D col, ColliderData data)
         {
             if (col == null)
             {

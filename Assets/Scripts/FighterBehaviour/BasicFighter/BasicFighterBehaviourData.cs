@@ -17,9 +17,9 @@ namespace FighterBehaviour.FighterBehaviours
         [Header("Health")] public int MaxHealth = 100;
 
         [Header("BoxData")] 
-        public BoxProfile IdleBoxProfile;
-        public BoxProfile CapturedProfile;
-        public BoxProfile HitStunBoxProfile;
+        public ColliderProfile IdleColliderProfile;
+        public ColliderProfile CapturedProfile;
+        public ColliderProfile HitStunColliderProfile;
 
         [Header("Attack Data")] public AttackData LightAttack;
         
@@ -37,9 +37,9 @@ namespace FighterBehaviour.FighterBehaviours
             var states = new FighterStateRegistry();
 
             // Simple states
-            var idle = new SimpleState(IdleBoxProfile);
+            var idle = new SimpleState(IdleColliderProfile);
             var jumpRise = new JumpState(JumpForce, MoveSpeed);
-            var airborne = new SimpleState(IdleBoxProfile);
+            var airborne = new SimpleState(IdleColliderProfile);
 
             // Movement states
             var walk = new MovingState(
@@ -50,7 +50,7 @@ namespace FighterBehaviour.FighterBehaviours
             );
 
             // Defensive / reaction states
-            var hitStun = new HitStunState(HitStunBoxProfile);
+            var hitStun = new HitStunState(HitStunColliderProfile);
             var lightAttack = new AttackState(LightAttack, BasicFighterStateKeys.LightAttack);
             var special1 = Special1.CreateRuntimeState();
             var captured = new CapturedState(CapturedProfile);

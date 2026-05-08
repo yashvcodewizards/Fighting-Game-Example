@@ -1,6 +1,6 @@
 namespace FightTest.States
 {
-    public sealed class StateFrameTimer
+    public sealed class StateTimer
     {
         public int CurrentFrame { get; private set; }
         public int DurationFrames { get; private set; }

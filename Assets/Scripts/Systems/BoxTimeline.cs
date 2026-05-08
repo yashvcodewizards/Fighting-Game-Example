@@ -8,7 +8,7 @@ namespace FightTest.Systems
     {
         public BoxTimelineData[] Entries;
 
-        public BoxFrameData GetFrame(int frame)
+        public ColliderFrameData GetFrame(int frame)
         {
             if (Entries == null)
             {

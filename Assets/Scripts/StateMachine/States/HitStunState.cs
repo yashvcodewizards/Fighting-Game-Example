@@ -7,25 +7,25 @@ namespace FightTest.States
 {
     public sealed class HitStunState : IState
     {
-        private readonly BoxProfile _boxProfile;
+        private readonly ColliderProfile _colliderProfile;
         private readonly string _animationLabel;
 
-        public HitStunState(BoxProfile boxProfile, string animationLabel = null)
+        public HitStunState(ColliderProfile colliderProfile, string animationLabel = null)
         {
-            _boxProfile = boxProfile;
+            _colliderProfile = colliderProfile;
             _animationLabel = animationLabel;
         }
 
         public void Enter(FighterRuntime runtime)
         {
-            runtime.Services.HitBoxManager.ApplyProfile(_boxProfile);
+            runtime.Services.HitBoxManager.ApplyProfile(_colliderProfile);
             
             var pendingHit = runtime.Context.PendingHit;
 
             if (!pendingHit.HasValue)
             {
                 runtime.Context.PendingHit = null;
-                runtime.Services.StateFrameTimer.Start(0);
+                runtime.Services.StateTimer.Start(0);
                 return;
             }
             
@@ -44,12 +44,12 @@ namespace FightTest.States
             );
             
             runtime.Services.Presentation.Play(_animationLabel);
-            runtime.Services.StateFrameTimer.Start(data.EnemyHitStunFrames);
+            runtime.Services.StateTimer.Start(data.EnemyHitStunFrames);
         }
 
         public void Tick(FighterRuntime runtime)
         {
-            runtime.Services.StateFrameTimer.Tick();
+            runtime.Services.StateTimer.Tick();
         }
 
         public void Exit(FighterRuntime runtime)

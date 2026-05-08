@@ -7,7 +7,7 @@ namespace FightTest.Systems
     {
         public int StartFrame;
         public int EndFrame;
-        public BoxFrameData Frame;
+        public ColliderFrameData Frame;
 
         public bool Contains(int frame)
         {
