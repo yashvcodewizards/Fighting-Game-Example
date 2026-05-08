@@ -1,11 +1,11 @@
 using Data;
-using FightTest.Data;
+using FightTest.StateMachine;
 
 namespace FightTest.Systems
 {
     public interface IHittable
     {
-        void ReceiveHit(HitInfo data);
+        HitReactionType ReceiveHit(HitInfo data);
         //void ReceiveThrow(AttackData data);
     }
 }

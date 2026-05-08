@@ -81,7 +81,7 @@ namespace FightTest.StateMachine
             CurrentState = null;
         }
 
-        private List<ITransition> GetTransitions(IState state)
+        public List<ITransition> GetTransitions(IState state)
         {
             return _transitions.TryGetValue(state, out var list) ? list : _empty;
         }

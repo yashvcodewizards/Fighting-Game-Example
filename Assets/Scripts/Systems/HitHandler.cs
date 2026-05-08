@@ -1,5 +1,6 @@
 using Data;
 using FighterBehaviour;
+using FightTest.StateMachine;
 using UnityEngine;
 
 namespace FightTest.Systems
@@ -13,16 +14,23 @@ namespace FightTest.Systems
             _runtime = runtime;
         }
 
-        public void ReceiveHit(HitInfo hitInfo)
+        public HitReactionType ReceiveHit(HitInfo hitInfo)
         {
             if (_runtime == null)
             {
                 Debug.LogWarning($"{name} HitHandler has no runtime.");
-                return;
+                return HitReactionType.Miss;
             }
 
             _runtime.Context.PendingHit = hitInfo;
-            
+            var hitReaction = _runtime.Queries.PreviewHitReaction();
+            if (hitReaction == HitReactionType.Miss)
+            {
+                _runtime.Context.PendingHit = null;
+            }
+
+            return hitReaction;
+
             /*if (_controller.QueryIsInvulnerable)
             {
                 return;

@@ -1,5 +1,7 @@
-﻿using FightTest.States;
+﻿using FightTest.StateMachine;
+using FightTest.States;
 using FightTest.States.FoitingueStates;
+using FightTest.Systems;
 
 namespace FighterBehaviour
 {
@@ -137,6 +139,26 @@ namespace FighterBehaviour
         public bool IsStateFinished()
         {
             return _services.StateFrameTimer.IsFinished && _services.StateFrameTimer.DurationFrames > 0;
+        }
+        
+        public HitReactionType PreviewHitReaction()
+        {
+            var transitions = _services.Root.GetTransitions(_services.Root.CurrentState);
+            foreach (var transition in transitions)
+            {
+                if (!(transition is IHitReaction hitTransition))
+                {
+                    continue;
+                }
+
+                var next = transition.Evaluate();
+                if (next != null)
+                {
+                    return hitTransition.ReactionType;
+                }
+            }
+
+            return HitReactionType.Miss;
         }
     }
 }
